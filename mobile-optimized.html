@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Georgia Trip - Aug 10-18</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #2c3d4f;
+            --border: #dee2e6;
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --header-height: 60px;
+            --bottom-nav-height: 65px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+            position: relative;
+            padding-top: var(--header-height);
+            padding-bottom: var(--bottom-nav-height);
+        }
+
+        /* Compact Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+        }
+
+        .header-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .header-date {
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+
+        .current-day-indicator {
+            background: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: var(--bottom-nav-height);
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .bottom-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .day-nav-btn {
+            flex: 0 0 auto;
+            min-width: 55px;
+            height: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            color: #999;
+            padding: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .day-nav-btn.active {
+            color: var(--accent);
+        }
+
+        .day-nav-btn.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 0 0 3px 3px;
+        }
+
+        .day-nav-btn.past {
+            opacity: 0.5;
+        }
+
+        .day-nav-btn .day-num {
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .day-nav-btn .day-loc {
+            font-size: 0.6rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 50px;
+        }
+
+        /* Main Content Area */
+        .content-area {
+            min-height: calc(100vh - var(--header-height) - var(--bottom-nav-height));
+            position: relative;
+        }
+
+        .day-content {
+            display: none;
+            padding: 10px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .day-content.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Compact Day Header */
+        .day-header {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .day-header h2 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .day-header .location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        /* Quick Info Pills */
+        .quick-info {
+            display: flex;
+            gap: 8px;
+            margin: 10px 0;
+            overflow-x: auto;
+            padding: 2px 0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .quick-info::-webkit-scrollbar {
+            display: none;
+        }
+
+        .info-pill {
+            flex: 0 0 auto;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            white-space: nowrap;
+        }
+
+        .info-pill i {
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        /* Collapsible Activity Cards */
+        .activity-section {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .activity-header {
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s ease;
+        }
+
+        .activity-header:active {
+            background: var(--light);
+        }
+
+        .activity-time {
+            background: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .activity-title {
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .activity-title h3 {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 2px;
+        }
+
+        .activity-title .subtitle {
+            font-size: 0.75rem;
+            color: #999;
+        }
+
+        .expand-icon {
+            color: #999;
+            transition: transform 0.3s ease;
+        }
+
+        .activity-section.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .activity-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .activity-section.expanded .activity-details {
+            max-height: 500px;
+        }
+
+        .activity-content {
+            padding: 0 12px 12px;
+        }
+
+        .activity-description {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        .activity-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .meta-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--light);
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .meta-tag i {
+            color: var(--accent);
+            font-size: 0.85rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: white;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:active {
+            background: var(--light);
+            transform: scale(0.98);
+        }
+
+        .action-btn.primary {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* Transport Alert */
+        .transport-alert {
+            background: #fff3cd;
+            border-left: 3px solid var(--warning);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: start;
+            gap: 8px;
+        }
+
+        .transport-alert i {
+            color: var(--warning);
+            margin-top: 2px;
+        }
+
+        /* Floating Action Button */
+        .fab-menu {
+            position: fixed;
+            bottom: 80px;
+            right: 15px;
+            z-index: 99;
+        }
+
+        .fab-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .fab-btn:active {
+            transform: scale(0.95);
+        }
+
+        .fab-options {
+            position: absolute;
+            bottom: 60px;
+            right: 0;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .fab-menu.open .fab-options {
+            display: flex;
+            animation: fadeUp 0.3s ease;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fab-option {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            white-space: nowrap;
+            text-decoration: none;
+            color: var(--primary);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Loading State */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Swipe Hint */
+        .swipe-hint {
+            position: fixed;
+            bottom: 75px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .swipe-hint.show {
+            opacity: 1;
+        }
+
+        /* Landscape Mode Adjustments */
+        @media (orientation: landscape) and (max-height: 500px) {
+            .header {
+                height: 50px;
+            }
+            
+            .bottom-nav {
+                height: 55px;
+            }
+            
+            .day-nav-btn {
+                height: 45px;
+            }
+            
+            .activity-section {
+                margin-bottom: 8px;
+            }
+        }
+
+        /* Tablet Adjustments */
+        @media (min-width: 768px) {
+            .content-area {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .bottom-nav {
+                justify-content: center;
+            }
+            
+            .day-nav-btn {
+                min-width: 70px;
+            }
+        }
+
+        /* Desktop View */
+        @media (min-width: 1024px) {
+            body {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+            
+            .header {
+                position: relative;
+                height: auto;
+                padding: 20px;
+            }
+            
+            .bottom-nav {
+                position: relative;
+                height: auto;
+                box-shadow: none;
+                border-bottom: 1px solid var(--border);
+                margin-bottom: 20px;
+            }
+            
+            .content-area {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+        }
+
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --light: #1a1a1a;
+                --dark: #f0f0f0;
+                --border: #333;
+            }
+            
+            body {
+                background: #0d0d0d;
+            }
+            
+            .header, .bottom-nav, .day-header, 
+            .activity-section, .info-pill, .action-btn {
+                background: #1a1a1a;
+                color: #f0f0f0;
+            }
+            
+            .activity-header:active {
+                background: #2a2a2a;
+            }
+            
+            .meta-tag {
+                background: #2a2a2a;
+                color: #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Compact Header -->
+    <div class="header">
+        <div class="header-title">Georgia 🇬🇪</div>
+        <div class="header-date">Aug 10-18</div>
+        <div class="current-day-indicator" id="currentDayBadge">Day 1</div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="content-area">
+        <!-- Day 1 Content -->
+        <div class="day-content active" id="day1">
+            <div class="day-header">
+                <h2>Day 1 - Saturday</h2>
+                <div class="location">
+                    <i class="fas fa-map-pin"></i>
+                    <span>Kutaisi → Batumi</span>
+                </div>
+            </div>
+
+            <div class="quick-info">
+                <div class="info-pill">
+                    <i class="fas fa-plane-arrival"></i>
+                    <span>10:00 Arrival</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-bus"></i>
+                    <span>12:00 Bus</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-umbrella-beach"></i>
+                    <span>14:30 Batumi</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-bed"></i>
+                    <span>Boulevard Hotel</span>
+                </div>
+            </div>
+
+            <div class="transport-alert">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <strong>Travel Day:</strong> Kutaisi Airport → Bus Station → Batumi (2.5 hour journey)
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">16:00</div>
+                    <div class="activity-title">
+                        <h3>Batumi Boulevard</h3>
+                        <div class="subtitle">Ali & Nino Statue</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Start with a romantic walk along the seaside. The moving Ali & Nino statue rotates every 10 minutes!
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-clock"></i> 24/7</span>
+                            <span class="meta-tag"><i class="fas fa-tag"></i> FREE</span>
+                            <span class="meta-tag"><i class="fas fa-walking"></i> 1 hr</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Batumi+Boulevard" class="action-btn primary">
+                                <i class="fas fa-map"></i> Map
+                            </a>
+                            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Batumi+Boulevard&dates=20250810T160000/20250810T170000" class="action-btn">
+                                <i class="fas fa-bell"></i> Remind
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">17:00</div>
+                    <div class="activity-title">
+                        <h3>Piazza Square</h3>
+                        <div class="subtitle">Dinner & Live Music</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Italian-style square perfect for your first Georgian dinner.
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-utensils"></i> Dinner</span>
+                            <span class="meta-tag"><i class="fas fa-money-bill"></i> 20-40 GEL</span>
+                            <span class="meta-tag"><i class="fas fa-music"></i> Live music</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Piazza+Square+Batumi" class="action-btn primary">
+                                <i class="fas fa-map"></i> Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">19:00</div>
+                    <div class="activity-title">
+                        <h3>Dancing Fountains</h3>
+                        <div class="subtitle">Evening Show</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Magical fountain show with music and lights - perfect ending to Day 1!
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-clock"></i> Evening</span>
+                            <span class="meta-tag"><i class="fas fa-tag"></i> FREE</span>
+                            <span class="meta-tag"><i class="fas fa-camera"></i> Photo op</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Dancing+Fountains+Batumi" class="action-btn primary">
+                                <i class="fas fa-map"></i> Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 2 Content -->
+        <div class="day-content" id="day2">
+            <div class="day-header">
+                <h2>Day 2 - Sunday</h2>
+                <div class="location">
+                    <i class="fas fa-map-pin"></i>
+                    <span>Batumi Nature</span>
+                </div>
+            </div>
+
+            <div class="quick-info">
+                <div class="info-pill">
+                    <i class="fas fa-leaf"></i>
+                    <span>Botanical Garden</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-tram"></i>
+                    <span>Cable Car</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-sun"></i>
+                    <span>Sunset Views</span>
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">10:00</div>
+                    <div class="activity-title">
+                        <h3>Botanical Garden</h3>
+                        <div class="subtitle">4 hours exploration</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            One of the largest botanical gardens with Black Sea views. 9 climate zones!
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-clock"></i> 09:00-19:30</span>
+                            <span class="meta-tag"><i class="fas fa-money-bill"></i> 20 GEL</span>
+                            <span class="meta-tag"><i class="fas fa-bus"></i> Bus 31</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Batumi+Botanical+Garden" class="action-btn primary">
+                                <i class="fas fa-map"></i> Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">14:00</div>
+                    <div class="activity-title">
+                        <h3>Lunch Break</h3>
+                        <div class="subtitle">Try Adjarian Khachapuri!</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Must try: Boat-shaped cheese bread with egg - Batumi's signature!
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-utensils"></i> Local food</span>
+                            <span class="meta-tag"><i class="fas fa-money-bill"></i> 20-40 GEL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">15:30</div>
+                    <div class="activity-title">
+                        <h3>Argo Cable Car</h3>
+                        <div class="subtitle">Mountain Views</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Scenic ride to Anuria Mountain for panoramic views of Batumi and Black Sea.
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-clock"></i> Till 22:30</span>
+                            <span class="meta-tag"><i class="fas fa-money-bill"></i> 15-30 GEL</span>
+                            <span class="meta-tag"><i class="fas fa-camera"></i> Best views</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Argo+Cable+Car+Batumi" class="action-btn primary">
+                                <i class="fas fa-map"></i> Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">17:00</div>
+                    <div class="activity-title">
+                        <h3>Sunset on Mountaintop</h3>
+                        <div class="subtitle">Drinks with a view</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Perfect sunset spot with hilltop restaurant. Unforgettable views!
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-cocktail"></i> Bar/Cafe</span>
+                            <span class="meta-tag"><i class="fas fa-sun"></i> Golden hour</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 3 Content -->
+        <div class="day-content" id="day3">
+            <div class="day-header">
+                <h2>Day 3 - Monday</h2>
+                <div class="location">
+                    <i class="fas fa-map-pin"></i>
+                    <span>Batumi → Tbilisi</span>
+                </div>
+            </div>
+
+            <div class="quick-info">
+                <div class="info-pill">
+                    <i class="fas fa-train"></i>
+                    <span>08:00 Train</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-clock"></i>
+                    <span>6 hr journey</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-city"></i>
+                    <span>14:00 Tbilisi</span>
+                </div>
+            </div>
+
+            <div class="transport-alert">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <strong>Early Start:</strong> Train departs 8 AM. Check-out at 7 AM. Pack snacks for 6-hour journey!
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">14:00</div>
+                    <div class="activity-title">
+                        <h3>Arrival Tbilisi</h3>
+                        <div class="subtitle">Check-in & Rest</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Check into hotel near Rustaveli Avenue or Liberty Square.
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-bed"></i> Hotel</span>
+                            <span class="meta-tag"><i class="fas fa-location-arrow"></i> Central</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">16:30</div>
+                    <div class="activity-title">
+                        <h3>Rustaveli Avenue</h3>
+                        <div class="subtitle">Evening Walk</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Main avenue with shops, cafes, and historic buildings.
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-walking"></i> 1 hour</span>
+                            <span class="meta-tag"><i class="fas fa-tag"></i> FREE</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Rustaveli+Avenue+Tbilisi" class="action-btn primary">
+                                <i class="fas fa-map"></i> Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 4 Content -->
+        <div class="day-content" id="day4">
+            <div class="day-header">
+                <h2>Day 4 - Tuesday</h2>
+                <div class="location">
+                    <i class="fas fa-map-pin"></i>
+                    <span>Tbilisi & Mtskheta</span>
+                </div>
+            </div>
+
+            <div class="quick-info">
+                <div class="info-pill">
+                    <i class="fas fa-church"></i>
+                    <span>Sameba Cathedral</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-monument"></i>
+                    <span>Chronicles</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-landmark"></i>
+                    <span>Mtskheta UNESCO</span>
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">08:30</div>
+                    <div class="activity-title">
+                        <h3>Holy Trinity Cathedral</h3>
+                        <div class="subtitle">Sameba</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            One of the largest Orthodox churches in the world.
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-clock"></i> 08:00-20:00</span>
+                            <span class="meta-tag"><i class="fas fa-tag"></i> FREE</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Holy+Trinity+Cathedral+Tbilisi" class="action-btn primary">
+                                <i class="fas fa-map"></i> Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">12:00</div>
+                    <div class="activity-title">
+                        <h3>Mtskheta Trip</h3>
+                        <div class="subtitle">Ancient Capital</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            UNESCO site: Jvari Monastery & Svetitskhoveli Cathedral.
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-taxi"></i> 30-40 GEL</span>
+                            <span class="meta-tag"><i class="fas fa-tag"></i> FREE entry</span>
+                            <span class="meta-tag"><i class="fas fa-clock"></i> 3 hours</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Jvari+Monastery+Mtskheta" class="action-btn primary">
+                                <i class="fas fa-map"></i> Jvari
+                            </a>
+                            <a href="https://maps.google.com/?q=Svetitskhoveli+Cathedral" class="action-btn primary">
+                                <i class="fas fa-map"></i> Cathedral
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">18:30</div>
+                    <div class="activity-title">
+                        <h3>Dry Bridge Market</h3>
+                        <div class="subtitle">Souvenirs & Antiques</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Famous flea market for unique Georgian souvenirs.
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-shopping-bag"></i> Shopping</span>
+                            <span class="meta-tag"><i class="fas fa-tag"></i> FREE entry</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Dry+Bridge+Market+Tbilisi" class="action-btn primary">
+                                <i class="fas fa-map"></i> Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 5 Content -->
+        <div class="day-content" id="day5">
+            <div class="day-header">
+                <h2>Day 5 - Wednesday</h2>
+                <div class="location">
+                    <i class="fas fa-map-pin"></i>
+                    <span>Old Tbilisi</span>
+                </div>
+            </div>
+
+            <div class="quick-info">
+                <div class="info-pill">
+                    <i class="fas fa-tram"></i>
+                    <span>Cable Car</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-fort-awesome"></i>
+                    <span>Narikala</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-bath"></i>
+                    <span>Sulfur Baths</span>
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">09:00</div>
+                    <div class="activity-title">
+                        <h3>Narikala Fortress</h3>
+                        <div class="subtitle">Cable Car Ride</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Cable car from Rike Park. Best panoramic views of Tbilisi!
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-money-bill"></i> 5 GEL</span>
+                            <span class="meta-tag"><i class="fas fa-camera"></i> Best views</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Narikala+Cable+Car+Tbilisi" class="action-btn primary">
+                                <i class="fas fa-map"></i> Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">10:15</div>
+                    <div class="activity-title">
+                        <h3>Mother of Georgia</h3>
+                        <div class="subtitle">Iconic Statue</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            20-meter statue overlooking the city. Short walk from Narikala.
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-tag"></i> FREE</span>
+                            <span class="meta-tag"><i class="fas fa-camera"></i> Photo spot</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Mother+of+Georgia+Statue" class="action-btn primary">
+                                <i class="fas fa-map"></i> Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">12:00</div>
+                    <div class="activity-title">
+                        <h3>Sulfur Baths District</h3>
+                        <div class="subtitle">Abanotubani</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Historic bath district. Optional spa experience available.
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-spa"></i> Bath: 30-100 GEL</span>
+                            <span class="meta-tag"><i class="fas fa-clock"></i> Optional</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 6 Content -->
+        <div class="day-content" id="day6">
+            <div class="day-header">
+                <h2>Day 6 - Thursday</h2>
+                <div class="location">
+                    <i class="fas fa-map-pin"></i>
+                    <span>Kazbegi Mountains</span>
+                </div>
+            </div>
+
+            <div class="quick-info">
+                <div class="info-pill">
+                    <i class="fas fa-mountain"></i>
+                    <span>07:00 Start</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-church"></i>
+                    <span>Gergeti Church</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-camera"></i>
+                    <span>Mt. Kazbek</span>
+                </div>
+            </div>
+
+            <div class="transport-alert">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <strong>Full Day Trip:</strong> 3 hours each way. Join tour or hire driver. Pack warm clothes!
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">09:00</div>
+                    <div class="activity-title">
+                        <h3>Ananuri Fortress</h3>
+                        <div class="subtitle">First Stop</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            17th-century fortress overlooking Aragvi River.
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-tag"></i> FREE</span>
+                            <span class="meta-tag"><i class="fas fa-clock"></i> 30-45 min</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Ananuri+Fortress+Georgia" class="action-btn primary">
+                                <i class="fas fa-map"></i> Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">12:00</div>
+                    <div class="activity-title">
+                        <h3>Stepantsminda</h3>
+                        <div class="subtitle">Kazbegi Town</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Mountain town. 4WD to Gergeti Church or hike (1.5 hrs).
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-car"></i> 4WD: 50-60 GEL</span>
+                            <span class="meta-tag"><i class="fas fa-hiking"></i> Or hike</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Gergeti+Trinity+Church" class="action-btn primary">
+                                <i class="fas fa-map"></i> Church
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 7 Content -->
+        <div class="day-content" id="day7">
+            <div class="day-header">
+                <h2>Day 7 - Friday</h2>
+                <div class="location">
+                    <i class="fas fa-map-pin"></i>
+                    <span>Tbilisi → Kutaisi</span>
+                </div>
+            </div>
+
+            <div class="quick-info">
+                <div class="info-pill">
+                    <i class="fas fa-bus"></i>
+                    <span>4 hr journey</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-church"></i>
+                    <span>Bagrati Cathedral</span>
+                </div>
+            </div>
+
+            <div class="transport-alert">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <strong>Travel:</strong> Marshrutka from Didube Station (10-15 GEL) or train (5 hrs)
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">14:00</div>
+                    <div class="activity-title">
+                        <h3>Arrival Kutaisi</h3>
+                        <div class="subtitle">Check-in</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Check into hotel near city center.
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-bed"></i> Hotel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">16:00</div>
+                    <div class="activity-title">
+                        <h3>Bagrati Cathedral</h3>
+                        <div class="subtitle">UNESCO Site</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            11th-century cathedral with city views.
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-tag"></i> FREE</span>
+                            <span class="meta-tag"><i class="fas fa-camera"></i> Views</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Bagrati+Cathedral+Kutaisi" class="action-btn primary">
+                                <i class="fas fa-map"></i> Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 8 Content -->
+        <div class="day-content" id="day8">
+            <div class="day-header">
+                <h2>Day 8 - Saturday</h2>
+                <div class="location">
+                    <i class="fas fa-map-pin"></i>
+                    <span>Kutaisi Nature</span>
+                </div>
+            </div>
+
+            <div class="quick-info">
+                <div class="info-pill">
+                    <i class="fas fa-gem"></i>
+                    <span>Prometheus Cave</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-water"></i>
+                    <span>Martvili Canyon</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-landmark"></i>
+                    <span>Gelati UNESCO</span>
+                </div>
+            </div>
+
+            <div class="transport-alert">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <strong>Car Required:</strong> Rent car or join tour for nature sites
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">09:00</div>
+                    <div class="activity-title">
+                        <h3>Prometheus Cave</h3>
+                        <div class="subtitle">Underground Wonder</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Spectacular cave with underground boat ride option.
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-money-bill"></i> 23 GEL</span>
+                            <span class="meta-tag"><i class="fas fa-road"></i> 30 min drive</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Prometheus+Cave+Georgia" class="action-btn primary">
+                                <i class="fas fa-map"></i> Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">11:00</div>
+                    <div class="activity-title">
+                        <h3>Martvili Canyon</h3>
+                        <div class="subtitle">Boat Ride</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Turquoise waters and boat ride through canyon.
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-money-bill"></i> 17 + 15 GEL boat</span>
+                            <span class="meta-tag"><i class="fas fa-road"></i> 1 hr drive</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Martvili+Canyon+Georgia" class="action-btn primary">
+                                <i class="fas fa-map"></i> Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">16:30</div>
+                    <div class="activity-title">
+                        <h3>Gelati Monastery</h3>
+                        <div class="subtitle">UNESCO Heritage</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Medieval monastery with beautiful frescoes.
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-tag"></i> FREE</span>
+                            <span class="meta-tag"><i class="fas fa-road"></i> 9 km</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Gelati+Monastery+Georgia" class="action-btn primary">
+                                <i class="fas fa-map"></i> Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 9 Content -->
+        <div class="day-content" id="day9">
+            <div class="day-header">
+                <h2>Day 9 - Sunday</h2>
+                <div class="location">
+                    <i class="fas fa-map-pin"></i>
+                    <span>Departure</span>
+                </div>
+            </div>
+
+            <div class="quick-info">
+                <div class="info-pill">
+                    <i class="fas fa-alarm-clock"></i>
+                    <span>04:00 Wake up</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-taxi"></i>
+                    <span>04:30 Taxi</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fas fa-plane-departure"></i>
+                    <span>06:00 Flight</span>
+                </div>
+            </div>
+
+            <div class="transport-alert">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <strong>Very Early!</strong> Pre-book taxi night before. Pack everything at night!
+                </div>
+            </div>
+
+            <div class="activity-section" onclick="toggleActivity(this)">
+                <div class="activity-header">
+                    <div class="activity-time">04:30</div>
+                    <div class="activity-title">
+                        <h3>Airport Transfer</h3>
+                        <div class="subtitle">Pre-booked Taxi</div>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            20-30 minute journey to Kutaisi Airport. Arrive by 5 AM for 6 AM flight.
+                        </p>
+                        <div class="activity-meta">
+                            <span class="meta-tag"><i class="fas fa-taxi"></i> 25-30 GEL</span>
+                            <span class="meta-tag"><i class="fas fa-road"></i> 20 km</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="https://maps.google.com/?q=Kutaisi+International+Airport" class="action-btn primary">
+                                <i class="fas fa-map"></i> Airport
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-section">
+                <div class="activity-header" style="cursor: default;">
+                    <div class="activity-time">✈️</div>
+                    <div class="activity-title">
+                        <h3>Safe Travels!</h3>
+                        <div class="subtitle">გმადლობთ Georgia!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <button class="day-nav-btn active" onclick="switchDay(1)">
+            <span class="day-num">Day 1</span>
+            <span class="day-loc">Batumi</span>
+        </button>
+        <button class="day-nav-btn" onclick="switchDay(2)">
+            <span class="day-num">Day 2</span>
+            <span class="day-loc">Batumi</span>
+        </button>
+        <button class="day-nav-btn" onclick="switchDay(3)">
+            <span class="day-num">Day 3</span>
+            <span class="day-loc">Tbilisi</span>
+        </button>
+        <button class="day-nav-btn" onclick="switchDay(4)">
+            <span class="day-num">Day 4</span>
+            <span class="day-loc">Tbilisi</span>
+        </button>
+        <button class="day-nav-btn" onclick="switchDay(5)">
+            <span class="day-num">Day 5</span>
+            <span class="day-loc">Tbilisi</span>
+        </button>
+        <button class="day-nav-btn" onclick="switchDay(6)">
+            <span class="day-num">Day 6</span>
+            <span class="day-loc">Kazbegi</span>
+        </button>
+        <button class="day-nav-btn" onclick="switchDay(7)">
+            <span class="day-num">Day 7</span>
+            <span class="day-loc">Kutaisi</span>
+        </button>
+        <button class="day-nav-btn" onclick="switchDay(8)">
+            <span class="day-num">Day 8</span>
+            <span class="day-loc">Kutaisi</span>
+        </button>
+        <button class="day-nav-btn" onclick="switchDay(9)">
+            <span class="day-num">Day 9</span>
+            <span class="day-loc">Depart</span>
+        </button>
+    </div>
+
+    <!-- Floating Action Button -->
+    <div class="fab-menu" id="fabMenu">
+        <div class="fab-options">
+            <a href="#" class="fab-option" onclick="showOverview(); return false;">
+                <i class="fas fa-map"></i> Overview
+            </a>
+            <a href="#" class="fab-option" onclick="showCurrentDay(); return false;">
+                <i class="fas fa-calendar-day"></i> Today
+            </a>
+        </div>
+        <button class="fab-btn" onclick="toggleFab()">
+            <i class="fas fa-ellipsis-v"></i>
+        </button>
+    </div>
+
+    <!-- Swipe Hint -->
+    <div class="swipe-hint" id="swipeHint">
+        Swipe to change days
+    </div>
+
+    <script>
+        let currentDay = 1;
+        const totalDays = 9;
+        const tripStartDate = new Date('2025-08-10');
+        
+        // Toggle activity card expansion
+        function toggleActivity(element) {
+            element.classList.toggle('expanded');
+        }
+        
+        // Switch day
+        function switchDay(dayNum) {
+            // Hide all days
+            document.querySelectorAll('.day-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active from all nav buttons
+            document.querySelectorAll('.day-nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected day
+            document.getElementById('day' + dayNum).classList.add('active');
+            
+            // Mark nav button as active
+            document.querySelectorAll('.day-nav-btn')[dayNum - 1].classList.add('active');
+            
+            // Update header badge
+            document.getElementById('currentDayBadge').textContent = 'Day ' + dayNum;
+            
+            currentDay = dayNum;
+            
+            // Scroll nav button into view
+            const activeBtn = document.querySelectorAll('.day-nav-btn')[dayNum - 1];
+            activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+        
+        // Toggle FAB menu
+        function toggleFab() {
+            document.getElementById('fabMenu').classList.toggle('open');
+        }
+        
+        // Show current day based on date
+        function showCurrentDay() {
+            const today = new Date();
+            const diffTime = today - tripStartDate;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            let targetDay = 1;
+            if (diffDays >= 0 && diffDays < totalDays) {
+                targetDay = diffDays + 1;
+            } else if (diffDays >= totalDays) {
+                targetDay = totalDays;
+            }
+            
+            switchDay(targetDay);
+            toggleFab();
+        }
+        
+        // Show overview (could open a modal or navigate)
+        function showOverview() {
+            alert('Trip Overview:\n\nDay 1-2: Batumi (Beach & Nature)\nDay 3-5: Tbilisi (Capital City)\nDay 6: Kazbegi (Mountains)\nDay 7-8: Kutaisi (Caves & Canyons)\nDay 9: Departure');
+            toggleFab();
+        }
+        
+        // Touch handling for swipe
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentDay < totalDays) {
+                    // Swipe left - next day
+                    switchDay(currentDay + 1);
+                } else if (diff < 0 && currentDay > 1) {
+                    // Swipe right - previous day
+                    switchDay(currentDay - 1);
+                }
+                
+                // Show swipe hint
+                const hint = document.getElementById('swipeHint');
+                hint.classList.add('show');
+                setTimeout(() => hint.classList.remove('show'), 1000);
+            }
+        }
+        
+        // Add touch listeners
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        // Mark past days
+        function updateDayStatus() {
+            const today = new Date();
+            const diffTime = today - tripStartDate;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            document.querySelectorAll('.day-nav-btn').forEach((btn, index) => {
+                if (index < diffDays && diffDays < totalDays) {
+                    btn.classList.add('past');
+                }
+            });
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDayStatus();
+            // Optionally show current day on load
+            // showCurrentDay();
+        });
+        
+        // Close FAB when clicking outside
+        document.addEventListener('click', function(e) {
+            const fab = document.getElementById('fabMenu');
+            if (!fab.contains(e.target)) {
+                fab.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>
