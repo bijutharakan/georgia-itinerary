@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Georgia Trip • Aug 10-18</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --accent-1: #667eea;
+            --accent-2: #764ba2;
+            --success: #48bb78;
+            --warning: #f6ad55;
+            --danger: #fc8181;
+            --shadow-soft: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-large: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,32L48,37.3C96,43,192,53,288,90.7C384,128,480,192,576,192C672,192,768,128,864,112C960,96,1056,128,1152,138.7C1248,149,1344,139,1392,133.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-date {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+
+        /* Day Selector */
+        .day-selector {
+            padding: 15px;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .day-selector::-webkit-scrollbar {
+            display: none;
+        }
+
+        .day-card {
+            flex: 0 0 auto;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 15px 20px;
+            min-width: 100px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-soft);
+            border: 2px solid transparent;
+        }
+
+        .day-card:active {
+            transform: scale(0.95);
+        }
+
+        .day-card.active {
+            background: white;
+            border-color: var(--accent-1);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .day-card .day-num {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .day-card .day-date {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .day-card .day-location {
+            font-size: 0.85rem;
+            color: var(--accent-1);
+            font-weight: 500;
+        }
+
+        .day-card.active .day-num {
+            color: var(--accent-1);
+        }
+
+        /* Content Container */
+        .content-container {
+            padding: 0 15px 100px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .day-content {
+            display: none;
+            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .day-content.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Location Badge */
+        .location-badge {
+            background: white;
+            border-radius: 20px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-medium);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .location-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: var(--bg-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .location-info h2 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .location-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .stat-icon {
+            width: 36px;
+            height: 36px;
+            margin: 0 auto 8px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .stat-icon.activities {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .stat-icon.duration {
+            background: linear-gradient(135deg, #f6ad55, #ed8936);
+            color: white;
+        }
+
+        .stat-icon.budget {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+        }
+
+        .stat-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* Activity Cards */
+        .activity-card {
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .activity-card:active {
+            transform: scale(0.98);
+        }
+
+        .activity-header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+
+        .activity-time {
+            background: var(--bg-gradient);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .activity-info {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 3px;
+        }
+
+        .activity-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .activity-subtitle i {
+            font-size: 0.75rem;
+            color: var(--accent-1);
+        }
+
+        .activity-expand {
+            color: var(--text-secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .activity-card.expanded .activity-expand {
+            transform: rotate(180deg);
+        }
+
+        .activity-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .activity-card.expanded .activity-details {
+            max-height: 400px;
+        }
+
+        .activity-content {
+            padding: 0 15px 15px;
+        }
+
+        .activity-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .activity-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .tag {
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--accent-1);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .tag.price {
+            background: rgba(72, 187, 120, 0.1);
+            color: var(--success);
+        }
+
+        .tag.duration {
+            background: rgba(246, 173, 85, 0.1);
+            color: var(--warning);
+        }
+
+        .activity-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .action-btn.primary {
+            background: var(--bg-gradient);
+            color: white;
+        }
+
+        .action-btn.secondary {
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--accent-1);
+        }
+
+        .action-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Transport Alert */
+        .alert-card {
+            background: linear-gradient(135deg, #fef5e7, #fdebd0);
+            border-left: 4px solid var(--warning);
+            border-radius: 12px;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: start;
+            gap: 12px;
+        }
+
+        .alert-icon {
+            color: var(--warning);
+            font-size: 1.1rem;
+            margin-top: 2px;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            margin-bottom: 3px;
+        }
+
+        .alert-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 10px 20px 25px;
+            display: flex;
+            justify-content: space-around;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            padding: 8px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+        }
+
+        .nav-item.active {
+            color: var(--accent-1);
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+        }
+
+        .nav-item span {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Dark Theme */
+        body.dark {
+            --bg-gradient: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            --card-bg: rgba(45, 55, 72, 0.95);
+            --text-primary: #f7fafc;
+            --text-secondary: #a0aec0;
+            --accent-1: #9f7aea;
+            --accent-2: #805ad5;
+        }
+
+        body.dark::before {
+            opacity: 0.1;
+        }
+
+        body.dark .day-card {
+            background: rgba(45, 55, 72, 0.9);
+        }
+
+        body.dark .day-card.active {
+            background: rgba(58, 67, 83, 1);
+        }
+
+        body.dark .location-badge,
+        body.dark .stat-card,
+        body.dark .activity-card {
+            background: rgba(45, 55, 72, 0.95);
+        }
+
+        body.dark .bottom-nav {
+            background: rgba(26, 32, 44, 0.95);
+        }
+
+        body.dark .alert-card {
+            background: linear-gradient(135deg, rgba(254, 245, 231, 0.1), rgba(253, 235, 208, 0.1));
+        }
+
+        /* Floating Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 101;
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.9);
+        }
+
+        .theme-toggle i {
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        /* Loading skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="header-title">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Georgia Adventure</span>
+            </div>
+            <div class="header-date">Aug 10-18, 2025</div>
+        </div>
+    </div>
+
+    <!-- Day Selector -->
+    <div class="day-selector" id="daySelector">
+        <div class="day-card active" onclick="selectDay(1)">
+            <div class="day-num">SAT</div>
+            <div class="day-date">10</div>
+            <div class="day-location">Batumi</div>
+        </div>
+        <div class="day-card" onclick="selectDay(2)">
+            <div class="day-num">SUN</div>
+            <div class="day-date">11</div>
+            <div class="day-location">Batumi</div>
+        </div>
+        <div class="day-card" onclick="selectDay(3)">
+            <div class="day-num">MON</div>
+            <div class="day-date">12</div>
+            <div class="day-location">Tbilisi</div>
+        </div>
+        <div class="day-card" onclick="selectDay(4)">
+            <div class="day-num">TUE</div>
+            <div class="day-date">13</div>
+            <div class="day-location">Tbilisi</div>
+        </div>
+        <div class="day-card" onclick="selectDay(5)">
+            <div class="day-num">WED</div>
+            <div class="day-date">14</div>
+            <div class="day-location">Tbilisi</div>
+        </div>
+        <div class="day-card" onclick="selectDay(6)">
+            <div class="day-num">THU</div>
+            <div class="day-date">15</div>
+            <div class="day-location">Kazbegi</div>
+        </div>
+        <div class="day-card" onclick="selectDay(7)">
+            <div class="day-num">FRI</div>
+            <div class="day-date">16</div>
+            <div class="day-location">Kutaisi</div>
+        </div>
+        <div class="day-card" onclick="selectDay(8)">
+            <div class="day-num">SAT</div>
+            <div class="day-date">17</div>
+            <div class="day-location">Kutaisi</div>
+        </div>
+        <div class="day-card" onclick="selectDay(9)">
+            <div class="day-num">SUN</div>
+            <div class="day-date">18</div>
+            <div class="day-location">Depart</div>
+        </div>
+    </div>
+
+    <!-- Content Container -->
+    <div class="content-container">
+        <!-- Day 1 Content -->
+        <div class="day-content active" id="day1">
+            <div class="location-badge">
+                <div class="location-icon">
+                    <i class="fas fa-plane-arrival"></i>
+                </div>
+                <div class="location-info">
+                    <h2>Kutaisi → Batumi</h2>
+                    <p>Arrival & Black Sea Coast</p>
+                </div>
+            </div>
+
+            <div class="quick-stats">
+                <div class="stat-card">
+                    <div class="stat-icon activities">
+                        <i class="fas fa-list"></i>
+                    </div>
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Activities</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon duration">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-value">8h</div>
+                    <div class="stat-label">Active Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon budget">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="stat-value">60₾</div>
+                    <div class="stat-label">Est. Cost</div>
+                </div>
+            </div>
+
+            <div class="alert-card">
+                <i class="fas fa-info-circle alert-icon"></i>
+                <div class="alert-content">
+                    <div class="alert-title">Travel Day</div>
+                    <div class="alert-text">Flight arrives 10 AM • Bus to Batumi at noon • 2.5 hour journey</div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">14:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Check-in Batumi</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-bed"></i> Boulevard Hotel
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Arrive in Batumi and check into your hotel near the boulevard for easy beach access.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag">Hotel</span>
+                            <span class="tag duration">30 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">16:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Batumi Boulevard</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-walking"></i> Ali & Nino Statue
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Stroll along the seaside boulevard and watch the moving Ali & Nino statue - it rotates every 10 minutes!
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">FREE</span>
+                            <span class="tag duration">1 hour</span>
+                            <span class="tag">Must See</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Batumi+Boulevard" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                            <button class="action-btn secondary">
+                                <i class="fas fa-camera"></i> Photos
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">17:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Piazza Square</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-utensils"></i> Dinner & Live Music
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Italian-style square with restaurants and cafes. Perfect for your first Georgian dinner!
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">20-40₾</span>
+                            <span class="tag duration">1.5 hours</span>
+                            <span class="tag">Live Music</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Piazza+Square+Batumi" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">19:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Dancing Fountains</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-music"></i> Evening Show
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Musical fountain show with lights - a magical end to your first day!
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">FREE</span>
+                            <span class="tag duration">30 min</span>
+                            <span class="tag">Family Friendly</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Dancing+Fountains+Batumi" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 2 Content -->
+        <div class="day-content" id="day2">
+            <div class="location-badge">
+                <div class="location-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="location-info">
+                    <h2>Batumi Nature Day</h2>
+                    <p>Botanical Garden & Cable Car</p>
+                </div>
+            </div>
+
+            <div class="quick-stats">
+                <div class="stat-card">
+                    <div class="stat-icon activities">
+                        <i class="fas fa-list"></i>
+                    </div>
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Activities</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon duration">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-value">10h</div>
+                    <div class="stat-label">Active Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon budget">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="stat-value">100₾</div>
+                    <div class="stat-label">Est. Cost</div>
+                </div>
+            </div>
+
+            <!-- Add more Day 2 activities here -->
+        </div>
+
+        <!-- Add more days (3-9) here following the same pattern -->
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <button class="nav-item active" onclick="showSection('itinerary')">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Itinerary</span>
+        </button>
+        <button class="nav-item" onclick="showSection('map')">
+            <i class="fas fa-map"></i>
+            <span>Map</span>
+        </button>
+        <button class="nav-item" onclick="showSection('photos')">
+            <i class="fas fa-camera"></i>
+            <span>Photos</span>
+        </button>
+        <button class="nav-item" onclick="showSection('notes')">
+            <i class="fas fa-sticky-note"></i>
+            <span>Notes</span>
+        </button>
+    </div>
+
+    <script>
+        let currentDay = 1;
+        let isDarkTheme = false;
+
+        // Toggle activity card expansion
+        function toggleCard(card) {
+            card.classList.toggle('expanded');
+        }
+
+        // Select day
+        function selectDay(day) {
+            // Update day cards
+            document.querySelectorAll('.day-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.querySelectorAll('.day-card')[day - 1].classList.add('active');
+
+            // Update content
+            document.querySelectorAll('.day-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            const dayContent = document.getElementById('day' + day);
+            if (dayContent) {
+                dayContent.classList.add('active');
+            }
+
+            // Scroll selected day into view
+            const selectedCard = document.querySelectorAll('.day-card')[day - 1];
+            selectedCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+
+            currentDay = day;
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            isDarkTheme = !isDarkTheme;
+            document.body.classList.toggle('dark');
+            const icon = document.getElementById('themeIcon');
+            icon.className = isDarkTheme ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Show section (bottom nav)
+        function showSection(section) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.closest('.nav-item').classList.add('active');
+            
+            // Here you would implement different sections
+            console.log('Showing section:', section);
+        }
+
+        // Touch gestures for swipe
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentDay < 9) {
+                    selectDay(currentDay + 1);
+                } else if (diff < 0 && currentDay > 1) {
+                    selectDay(currentDay - 1);
+                }
+            }
+        }
+
+        // Check system theme preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            toggleTheme();
+        }
+    </script>
+</body>
+</html>
