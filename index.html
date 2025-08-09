@@ -961,6 +961,7 @@
             border-radius: 12px;
             border: 2px solid transparent;
             transition: border-color 0.2s;
+            overflow: hidden;
         }
         
         .currency-input-wrapper:focus-within {
@@ -993,6 +994,7 @@
             font-weight: 600;
             color: #4a5568;
             font-size: 0.9rem;
+            flex-shrink: 0;
         }
         
         .currency-swap {
@@ -3521,9 +3523,19 @@
         function swapCurrencies() {
             const gelInput = document.getElementById('gelInput');
             const targetInput = document.getElementById('targetInput');
-            const tempValue = gelInput.value;
-            gelInput.value = targetInput.value;
-            targetInput.value = tempValue;
+            
+            // Get the current values
+            const gelValue = parseFloat(gelInput.value) || 0;
+            const targetValue = parseFloat(targetInput.value) || 0;
+            
+            // Convert target currency to GEL
+            const rate = exchangeRates[currentTargetCurrency];
+            const newGelValue = targetValue / rate;
+            const newTargetValue = gelValue * rate;
+            
+            // Set the converted values
+            gelInput.value = newGelValue ? newGelValue.toFixed(2) : '';
+            targetInput.value = newTargetValue ? newTargetValue.toFixed(2) : '';
         }
         
         function changeTargetCurrency(currency) {
