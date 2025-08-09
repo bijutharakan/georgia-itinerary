@@ -3275,8 +3275,10 @@
                         calBtn.className = 'calendar-btn';
                         calBtn.innerHTML = '<i class="fas fa-calendar-plus"></i> Add';
                         calBtn.onclick = (e) => {
+                            e.preventDefault();
                             e.stopPropagation();
                             addToCalendar(item);
+                            return false;
                         };
                         itemDiv.appendChild(calBtn);
                     }
