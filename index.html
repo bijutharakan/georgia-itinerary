@@ -614,6 +614,142 @@
         .calendar-btn:hover {
             background: rgba(77, 150, 255, 0.2);
         }
+        
+        /* Journal Panel */
+        .journal-panel {
+            position: fixed;
+            top: 0;
+            left: -400px;
+            width: 400px;
+            max-width: 100%;
+            height: 100vh;
+            background: white;
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.1);
+            transition: left 0.3s ease;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .journal-panel.active {
+            left: 0;
+        }
+        
+        .journal-header {
+            background: linear-gradient(135deg, #FF6B6B, #FFD93D);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .journal-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        
+        .journal-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .journal-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .journal-day {
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, rgba(255, 217, 61, 0.05), rgba(255, 107, 107, 0.05));
+            border-radius: 12px;
+            padding: 15px;
+        }
+        
+        .journal-day-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .journal-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            resize: vertical;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        .journal-textarea:focus {
+            outline: none;
+            border-color: #FFD93D;
+            box-shadow: 0 0 0 2px rgba(255, 217, 61, 0.2);
+        }
+        
+        .journal-photos {
+            margin-top: 10px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .add-photo-btn {
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px dashed rgba(102, 126, 234, 0.3);
+            color: #667eea;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .add-photo-btn:hover {
+            background: rgba(102, 126, 234, 0.2);
+        }
+        
+        .journal-summary {
+            background: linear-gradient(135deg, rgba(107, 203, 119, 0.1), rgba(77, 150, 255, 0.1));
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .journal-summary h4 {
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+        
+        .export-btn {
+            background: linear-gradient(135deg, #6BCB77, #4D96FF);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
 
     </style>
 </head>
@@ -628,6 +764,19 @@
         </div>
         <div class="checklist-content" id="checklistContent">
             <!-- Checklist items will be populated by JavaScript -->
+        </div>
+    </div>
+    
+    <!-- Journal Panel -->
+    <div class="journal-panel" id="journalPanel">
+        <div class="journal-header">
+            <h3>📖 Trip Journal</h3>
+            <button class="journal-close" onclick="toggleJournal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="journal-content" id="journalContent">
+            <!-- Journal entries will be populated by JavaScript -->
         </div>
     </div>
     
@@ -655,6 +804,10 @@
         <button onclick="toggleChecklist()" style="background: linear-gradient(135deg, #6BCB77, #4D96FF); color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 3px 10px rgba(107, 203, 119, 0.3);">
             <i class="fas fa-check-square"></i>
             <span>Checklist</span>
+        </button>
+        <button onclick="toggleJournal()" style="background: linear-gradient(135deg, #FF6B6B, #FFD93D); color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 3px 10px rgba(255, 107, 107, 0.3);">
+            <i class="fas fa-book-open"></i>
+            <span>Journal</span>
         </button>
     </div>
 
@@ -3086,6 +3239,135 @@
             
             window.open(googleUrl, '_blank');
         }
+        
+        // Journal functionality
+        const journalData = {
+            'Day 1 - Aug 10': { text: '', photos: [] },
+            'Day 2 - Aug 11': { text: '', photos: [] },
+            'Day 3 - Aug 12': { text: '', photos: [] },
+            'Day 4 - Aug 13': { text: '', photos: [] },
+            'Day 5 - Aug 14': { text: '', photos: [] },
+            'Day 6 - Aug 15': { text: '', photos: [] },
+            'Day 7 - Aug 16': { text: '', photos: [] },
+            'Day 8 - Aug 17': { text: '', photos: [] },
+            'Day 9 - Aug 18': { text: '', photos: [] },
+            'Trip Summary': { text: '', photos: [] }
+        };
+        
+        function initializeJournal() {
+            // Load saved journal from localStorage
+            const saved = localStorage.getItem('georgiaJournal');
+            if (saved) {
+                Object.assign(journalData, JSON.parse(saved));
+            }
+            renderJournal();
+        }
+        
+        function renderJournal() {
+            const content = document.getElementById('journalContent');
+            content.innerHTML = '';
+            
+            // Add trip summary at the top
+            const summaryDiv = document.createElement('div');
+            summaryDiv.className = 'journal-summary';
+            summaryDiv.innerHTML = `
+                <h4>🌟 Trip Summary</h4>
+                <textarea 
+                    class="journal-textarea" 
+                    placeholder="Write your overall trip experience here..."
+                    onchange="saveJournalEntry('Trip Summary', this.value)"
+                >${journalData['Trip Summary'].text}</textarea>
+                <button class="export-btn" onclick="exportJournal()">
+                    <i class="fas fa-download"></i> Export Journal
+                </button>
+            `;
+            content.appendChild(summaryDiv);
+            
+            // Add daily entries
+            Object.keys(journalData).forEach(day => {
+                if (day === 'Trip Summary') return;
+                
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'journal-day';
+                
+                const dayTitle = document.createElement('div');
+                dayTitle.className = 'journal-day-title';
+                dayTitle.innerHTML = `
+                    <span>${day}</span>
+                    <span style="font-size: 0.8em; color: var(--text-secondary);">
+                        ${journalData[day].text ? '✓' : ''}
+                    </span>
+                `;
+                dayDiv.appendChild(dayTitle);
+                
+                const textarea = document.createElement('textarea');
+                textarea.className = 'journal-textarea';
+                textarea.placeholder = `What happened on ${day}? Places visited, memories made...`;
+                textarea.value = journalData[day].text;
+                textarea.onchange = (e) => saveJournalEntry(day, e.target.value);
+                dayDiv.appendChild(textarea);
+                
+                const photoSection = document.createElement('div');
+                photoSection.className = 'journal-photos';
+                photoSection.innerHTML = `
+                    <button class="add-photo-btn" onclick="alert('Photo upload feature coming soon!')">
+                        <i class="fas fa-camera"></i> Add Photo
+                    </button>
+                `;
+                dayDiv.appendChild(photoSection);
+                
+                content.appendChild(dayDiv);
+            });
+        }
+        
+        function saveJournalEntry(day, text) {
+            journalData[day].text = text;
+            localStorage.setItem('georgiaJournal', JSON.stringify(journalData));
+        }
+        
+        function toggleJournal() {
+            const panel = document.getElementById('journalPanel');
+            panel.classList.toggle('active');
+            if (panel.classList.contains('active')) {
+                initializeJournal();
+            }
+        }
+        
+        function exportJournal() {
+            let content = '=== GEORGIA TRIP JOURNAL ===\n';
+            content += 'August 9-18, 2025\n\n';
+            
+            // Add trip summary
+            if (journalData['Trip Summary'].text) {
+                content += '📌 TRIP SUMMARY\n';
+                content += '─'.repeat(40) + '\n';
+                content += journalData['Trip Summary'].text + '\n\n';
+            }
+            
+            // Add daily entries
+            Object.keys(journalData).forEach(day => {
+                if (day === 'Trip Summary') return;
+                if (journalData[day].text) {
+                    content += `📅 ${day}\n`;
+                    content += '─'.repeat(40) + '\n';
+                    content += journalData[day].text + '\n\n';
+                }
+            });
+            
+            // Create downloadable file
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Georgia_Trip_Journal_2025.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Initialize journal on load
+        window.addEventListener('load', () => {
+            initializeJournal();
+        });
     </script>
 </body>
 </html>
