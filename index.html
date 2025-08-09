@@ -15,21 +15,21 @@
         }
 
         :root {
-            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --card-bg: rgba(255, 255, 255, 0.95);
+            --gradient: linear-gradient(135deg, #A8EDEA 0%, #FED6E3 100%);
+            --card-bg: rgba(255, 255, 255, 0.98);
             --text-primary: #2d3748;
             --text-secondary: #718096;
-            --accent-purple: #667eea;
-            --accent-violet: #764ba2;
-            --success: #48bb78;
-            --warning: #f6ad55;
-            --shadow-soft: 0 4px 6px rgba(0, 0, 0, 0.07);
-            --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --accent-purple: #FF6B9D;
+            --accent-violet: #66D9EF;
+            --success: #95E1D3;
+            --warning: #FEE77A;
+            --shadow-soft: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.08);
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: var(--gradient);
+            background: linear-gradient(135deg, #F5F7FA 0%, #C3CFE2 100%);
             min-height: 100vh;
             color: var(--text-primary);
             overflow-x: hidden;
@@ -51,13 +51,14 @@
 
         /* Header */
         .header {
-            background: rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, #A8EDEA 0%, #FED6E3 100%);
             backdrop-filter: blur(10px);
             padding: 15px 20px;
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 20px rgba(168, 237, 234, 0.3);
         }
 
         .header-content {
@@ -67,7 +68,7 @@
         }
 
         .header-title {
-            color: white;
+            color: #2d3748;
             font-size: 1.2rem;
             font-weight: 600;
             display: flex;
@@ -76,9 +77,12 @@
         }
 
         .header-date {
-            color: rgba(255, 255, 255, 0.9);
+            color: #4a5568;
             font-size: 0.85rem;
-            font-weight: 400;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 4px 10px;
+            border-radius: 15px;
         }
 
         /* Day Selector */
@@ -113,9 +117,10 @@
         }
 
         .day-card.active {
-            background: white;
-            border-color: var(--accent-purple);
-            box-shadow: var(--shadow-medium);
+            background: linear-gradient(135deg, #FF6B9D, #66D9EF);
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.3);
+            color: white;
         }
 
         .day-card .day-num {
@@ -139,8 +144,10 @@
             font-weight: 500;
         }
 
-        .day-card.active .day-num {
-            color: var(--accent-purple);
+        .day-card.active .day-num,
+        .day-card.active .day-date,
+        .day-card.active .day-location {
+            color: white !important;
         }
 
         /* Content Container */
@@ -186,12 +193,13 @@
             width: 40px;
             height: 40px;
             border-radius: 12px;
-            background: var(--gradient);
+            background: linear-gradient(135deg, #A8EDEA, #FED6E3);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: #2d3748;
             font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(168, 237, 234, 0.3);
         }
 
         .location-info h2 {
@@ -228,7 +236,7 @@
         }
 
         .activity-time {
-            background: var(--gradient);
+            background: linear-gradient(135deg, #FF6B9D, #66D9EF);
             color: white;
             padding: 8px 12px;
             border-radius: 10px;
@@ -236,6 +244,7 @@
             font-size: 0.85rem;
             min-width: 60px;
             text-align: center;
+            box-shadow: 0 3px 10px rgba(255, 107, 157, 0.3);
         }
 
         .activity-info {
@@ -278,7 +287,7 @@
         }
 
         .activity-card.expanded .activity-details {
-            max-height: 400px;
+            max-height: 1000px;
         }
 
         .activity-content {
@@ -340,8 +349,9 @@
         }
 
         .action-btn.primary {
-            background: var(--gradient);
+            background: linear-gradient(135deg, #FF6B9D, #66D9EF);
             color: white;
+            box-shadow: 0 3px 10px rgba(255, 107, 157, 0.3);
         }
 
         .action-btn.secondary {
@@ -400,6 +410,14 @@
             </div>
             <div class="header-date">Aug 10-18, 2025</div>
         </div>
+    </div>
+
+    <!-- Expand/Collapse Toggle -->
+    <div style="padding: 10px 15px; background: rgba(255,255,255,0.3); backdrop-filter: blur(10px); display: flex; justify-content: center; gap: 10px; align-items: center;">
+        <button onclick="toggleAllCards()" style="background: linear-gradient(135deg, #FF6B9D, #66D9EF); color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 3px 10px rgba(255, 107, 157, 0.3);">
+            <i class="fas fa-compress-alt" id="toggleIcon"></i>
+            <span id="toggleText">Collapse All</span>
+        </button>
     </div>
 
     <!-- Day Selector -->
@@ -470,7 +488,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time"><i class="fas fa-language"></i></div>
                     <div class="activity-info">
@@ -498,7 +516,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time"><i class="fas fa-credit-card"></i></div>
                     <div class="activity-info">
@@ -538,7 +556,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time"><i class="fas fa-bus"></i></div>
                     <div class="activity-info">
@@ -567,7 +585,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time"><i class="fas fa-utensils"></i></div>
                     <div class="activity-info">
@@ -597,7 +615,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time"><i class="fas fa-mobile-alt"></i></div>
                     <div class="activity-info">
@@ -633,7 +651,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time"><i class="fas fa-sim-card"></i></div>
                     <div class="activity-info">
@@ -669,7 +687,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time"><i class="fas fa-church"></i></div>
                     <div class="activity-info">
@@ -699,7 +717,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time"><i class="fas fa-medkit"></i></div>
                     <div class="activity-info">
@@ -729,7 +747,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time"><i class="fas fa-map-marked-alt"></i></div>
                     <div class="activity-info">
@@ -766,7 +784,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time"><i class="fas fa-city"></i></div>
                     <div class="activity-info">
@@ -806,7 +824,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time"><i class="fas fa-mountain"></i></div>
                     <div class="activity-info">
@@ -845,7 +863,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time"><i class="fas fa-water"></i></div>
                     <div class="activity-info">
@@ -884,7 +902,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time"><i class="fas fa-shopping-bag"></i></div>
                     <div class="activity-info">
@@ -946,7 +964,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">10:00</div>
                     <div class="activity-info">
@@ -970,7 +988,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">12:00</div>
                     <div class="activity-info">
@@ -995,7 +1013,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">14:30</div>
                     <div class="activity-info">
@@ -1019,7 +1037,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">15:30</div>
                     <div class="activity-info">
@@ -1049,7 +1067,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">18:00</div>
                     <div class="activity-info">
@@ -1092,7 +1110,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">09:00</div>
                     <div class="activity-info">
@@ -1122,7 +1140,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">13:00</div>
                     <div class="activity-info">
@@ -1147,7 +1165,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">15:00</div>
                     <div class="activity-info">
@@ -1177,7 +1195,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">18:00</div>
                     <div class="activity-info">
@@ -1207,7 +1225,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">20:00</div>
                     <div class="activity-info">
@@ -1258,7 +1276,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">07:00</div>
                     <div class="activity-info">
@@ -1281,7 +1299,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">08:00</div>
                     <div class="activity-info">
@@ -1311,7 +1329,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">14:00</div>
                     <div class="activity-info">
@@ -1335,7 +1353,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">15:30</div>
                     <div class="activity-info">
@@ -1358,7 +1376,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">16:30</div>
                     <div class="activity-info">
@@ -1388,7 +1406,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">18:30</div>
                     <div class="activity-info">
@@ -1431,7 +1449,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">09:00</div>
                     <div class="activity-info">
@@ -1461,7 +1479,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">11:30</div>
                     <div class="activity-info">
@@ -1491,7 +1509,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">14:00</div>
                     <div class="activity-info">
@@ -1521,7 +1539,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">16:00</div>
                     <div class="activity-info">
@@ -1551,7 +1569,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">18:00</div>
                     <div class="activity-info">
@@ -1581,7 +1599,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">20:00</div>
                     <div class="activity-info">
@@ -1624,7 +1642,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">09:00</div>
                     <div class="activity-info">
@@ -1648,7 +1666,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">10:00</div>
                     <div class="activity-info">
@@ -1678,7 +1696,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">12:00</div>
                     <div class="activity-info">
@@ -1708,7 +1726,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">13:30</div>
                     <div class="activity-info">
@@ -1733,7 +1751,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">15:00</div>
                     <div class="activity-info">
@@ -1763,7 +1781,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">16:30</div>
                     <div class="activity-info">
@@ -1787,7 +1805,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">19:00</div>
                     <div class="activity-info">
@@ -1838,7 +1856,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">07:00</div>
                     <div class="activity-info">
@@ -1863,7 +1881,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">09:00</div>
                     <div class="activity-info">
@@ -1893,7 +1911,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">11:00</div>
                     <div class="activity-info">
@@ -1917,7 +1935,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">11:30</div>
                     <div class="activity-info">
@@ -1947,7 +1965,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">13:30</div>
                     <div class="activity-info">
@@ -1972,7 +1990,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">14:30</div>
                     <div class="activity-info">
@@ -1995,7 +2013,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">18:00</div>
                     <div class="activity-info">
@@ -2031,7 +2049,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">09:00</div>
                     <div class="activity-info">
@@ -2054,7 +2072,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">10:00</div>
                     <div class="activity-info">
@@ -2078,7 +2096,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">13:30</div>
                     <div class="activity-info">
@@ -2102,7 +2120,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">14:30</div>
                     <div class="activity-info">
@@ -2126,7 +2144,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">16:30</div>
                     <div class="activity-info">
@@ -2156,7 +2174,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">18:00</div>
                     <div class="activity-info">
@@ -2186,7 +2204,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">19:30</div>
                     <div class="activity-info">
@@ -2229,7 +2247,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">08:30</div>
                     <div class="activity-info">
@@ -2259,7 +2277,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">12:00</div>
                     <div class="activity-info">
@@ -2289,7 +2307,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">14:00</div>
                     <div class="activity-info">
@@ -2313,7 +2331,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">15:30</div>
                     <div class="activity-info">
@@ -2343,7 +2361,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">17:30</div>
                     <div class="activity-info">
@@ -2366,7 +2384,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">19:00</div>
                     <div class="activity-info">
@@ -2412,7 +2430,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">03:30</div>
                     <div class="activity-info">
@@ -2435,7 +2453,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">04:00</div>
                     <div class="activity-info">
@@ -2459,7 +2477,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">04:30</div>
                     <div class="activity-info">
@@ -2482,7 +2500,7 @@
                 </div>
             </div>
 
-            <div class="activity-card" onclick="toggleCard(this)">
+            <div class="activity-card expanded" onclick="toggleCard(this)">
                 <div class="activity-header">
                     <div class="activity-time">06:00</div>
                     <div class="activity-info">
@@ -2510,10 +2528,29 @@
 
     <script>
         let currentDay = 0;
+        let allExpanded = true;
 
         // Toggle activity card expansion
         function toggleCard(card) {
             card.classList.toggle('expanded');
+        }
+
+        // Toggle all cards
+        function toggleAllCards() {
+            const cards = document.querySelectorAll('.day-content.active .activity-card');
+            const icon = document.getElementById('toggleIcon');
+            const text = document.getElementById('toggleText');
+            
+            if (allExpanded) {
+                cards.forEach(card => card.classList.remove('expanded'));
+                icon.className = 'fas fa-expand-alt';
+                text.textContent = 'Expand All';
+            } else {
+                cards.forEach(card => card.classList.add('expanded'));
+                icon.className = 'fas fa-compress-alt';
+                text.textContent = 'Collapse All';
+            }
+            allExpanded = !allExpanded;
         }
 
         // Select day
