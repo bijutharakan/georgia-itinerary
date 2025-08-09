@@ -1101,11 +1101,11 @@
             </div>
             
             <div class="currency-input-group">
-                <div class="currency-label">Georgian Lari (GEL)</div>
+                <div class="currency-label" id="topCurrencyLabel">Georgian Lari (GEL)</div>
                 <div class="currency-input-wrapper">
-                    <span class="currency-flag">🇬🇪</span>
-                    <input type="number" class="currency-input" id="gelInput" placeholder="0.00" oninput="convertCurrency('gel')">
-                    <span class="currency-code">GEL</span>
+                    <span class="currency-flag" id="topFlag">🇬🇪</span>
+                    <input type="number" class="currency-input" id="topInput" placeholder="0.00" oninput="convertCurrency('top')">
+                    <span class="currency-code" id="topCode">GEL</span>
                 </div>
             </div>
             
@@ -1116,11 +1116,11 @@
             </div>
             
             <div class="currency-input-group">
-                <div class="currency-label" id="targetCurrencyLabel">UAE Dirham (AED)</div>
+                <div class="currency-label" id="bottomCurrencyLabel">UAE Dirham (AED)</div>
                 <div class="currency-input-wrapper">
-                    <span class="currency-flag" id="targetFlag">🇦🇪</span>
-                    <input type="number" class="currency-input" id="targetInput" placeholder="0.00" oninput="convertCurrency('target')">
-                    <span class="currency-code" id="targetCode">AED</span>
+                    <span class="currency-flag" id="bottomFlag">🇦🇪</span>
+                    <input type="number" class="currency-input" id="bottomInput" placeholder="0.00" oninput="convertCurrency('bottom')">
+                    <span class="currency-code" id="bottomCode">AED</span>
                 </div>
             </div>
             
@@ -1146,14 +1146,14 @@
                         <i class="fas fa-rupee-sign" style="color: #6BCB77;"></i>
                         INR Rate
                     </span>
-                    <span class="currency-rate-value" id="inrRate">1 GEL = 30.5 INR</span>
+                    <span class="currency-rate-value">1 GEL = 30.5 INR</span>
                 </div>
                 <div class="currency-rate-item">
                     <span class="currency-rate-label">
                         <i class="fas fa-dollar-sign" style="color: #FFD93D;"></i>
                         USD Rate
                     </span>
-                    <span class="currency-rate-value" id="usdRate">1 GEL = 0.37 USD</span>
+                    <span class="currency-rate-value">1 GEL = 0.37 USD</span>
                 </div>
                 <div class="currency-rate-item" style="margin-top: 8px; padding-top: 12px; border-top: 1px solid #cbd5e0;">
                     <span class="currency-rate-label">
@@ -3481,11 +3481,29 @@
         }
 
         // Currency Converter Functions
-        let currentTargetCurrency = 'AED';
+        let topCurrency = 'GEL';
+        let bottomCurrency = 'AED';
         const exchangeRates = {
-            'AED': 1.35,
-            'INR': 30.5,
-            'USD': 0.37
+            'GEL': {
+                'AED': 1.35,
+                'INR': 30.5,
+                'USD': 0.37
+            },
+            'AED': {
+                'GEL': 0.74,  // 1/1.35
+                'INR': 22.59, // 30.5/1.35
+                'USD': 0.27   // 0.37/1.35
+            },
+            'INR': {
+                'GEL': 0.033, // 1/30.5
+                'AED': 0.044, // 1.35/30.5
+                'USD': 0.012  // 0.37/30.5
+            },
+            'USD': {
+                'GEL': 2.70,  // 1/0.37
+                'AED': 3.65,  // 1.35/0.37
+                'INR': 82.43  // 30.5/0.37
+            }
         };
         
         function toggleCurrencyConverter() {
@@ -3505,65 +3523,117 @@
         }
         
         function convertCurrency(source) {
-            const gelInput = document.getElementById('gelInput');
-            const targetInput = document.getElementById('targetInput');
-            const rate = exchangeRates[currentTargetCurrency];
+            const topInput = document.getElementById('topInput');
+            const bottomInput = document.getElementById('bottomInput');
             
-            if (source === 'gel') {
-                const gelValue = parseFloat(gelInput.value) || 0;
-                targetInput.value = (gelValue * rate).toFixed(2);
+            if (source === 'top') {
+                const topValue = parseFloat(topInput.value) || 0;
+                if (topCurrency === bottomCurrency) {
+                    bottomInput.value = topValue.toFixed(2);
+                } else {
+                    const rate = exchangeRates[topCurrency][bottomCurrency];
+                    bottomInput.value = (topValue * rate).toFixed(2);
+                }
             } else {
-                const targetValue = parseFloat(targetInput.value) || 0;
-                gelInput.value = (targetValue / rate).toFixed(2);
+                const bottomValue = parseFloat(bottomInput.value) || 0;
+                if (topCurrency === bottomCurrency) {
+                    topInput.value = bottomValue.toFixed(2);
+                } else {
+                    const rate = exchangeRates[bottomCurrency][topCurrency];
+                    topInput.value = (bottomValue * rate).toFixed(2);
+                }
             }
         }
         
         function setQuickAmount(amount) {
-            document.getElementById('gelInput').value = amount;
-            convertCurrency('gel');
+            // Always set quick amounts in GEL
+            if (topCurrency === 'GEL') {
+                document.getElementById('topInput').value = amount;
+                convertCurrency('top');
+            } else if (bottomCurrency === 'GEL') {
+                document.getElementById('bottomInput').value = amount;
+                convertCurrency('bottom');
+            } else {
+                // If GEL is not selected, add it to top and set amount
+                topCurrency = 'GEL';
+                updateCurrencyDisplay('top', 'GEL');
+                document.getElementById('topInput').value = amount;
+                convertCurrency('top');
+            }
         }
         
         function swapCurrencies() {
-            const gelInput = document.getElementById('gelInput');
-            const targetInput = document.getElementById('targetInput');
+            // Swap the currencies
+            const tempCurrency = topCurrency;
+            topCurrency = bottomCurrency;
+            bottomCurrency = tempCurrency;
             
-            // Get the current values
-            const gelValue = parseFloat(gelInput.value) || 0;
-            const targetValue = parseFloat(targetInput.value) || 0;
+            // Update displays
+            updateCurrencyDisplay('top', topCurrency);
+            updateCurrencyDisplay('bottom', bottomCurrency);
             
-            // Convert target currency to GEL
-            const rate = exchangeRates[currentTargetCurrency];
-            const newGelValue = targetValue / rate;
-            const newTargetValue = gelValue * rate;
+            // Swap the values
+            const topInput = document.getElementById('topInput');
+            const bottomInput = document.getElementById('bottomInput');
+            const tempValue = topInput.value;
+            topInput.value = bottomInput.value;
+            bottomInput.value = tempValue;
             
-            // Set the converted values
-            gelInput.value = newGelValue ? newGelValue.toFixed(2) : '';
-            targetInput.value = newTargetValue ? newTargetValue.toFixed(2) : '';
+            // Update the dropdown to match
+            const dropdown = document.querySelector('select');
+            if (dropdown) {
+                // Update dropdown based on which currency is not GEL
+                if (topCurrency !== 'GEL') {
+                    dropdown.value = topCurrency;
+                } else {
+                    dropdown.value = bottomCurrency;
+                }
+            }
         }
         
-        function changeTargetCurrency(currency) {
-            currentTargetCurrency = currency;
-            const targetLabel = document.getElementById('targetCurrencyLabel');
-            const targetFlag = document.getElementById('targetFlag');
-            const targetCode = document.getElementById('targetCode');
-            const exchangeRateEl = document.getElementById('exchangeRate');
-            
+        function updateCurrencyDisplay(position, currency) {
             const currencyInfo = {
+                'GEL': { name: 'Georgian Lari (GEL)', flag: '🇬🇪', code: 'GEL' },
                 'AED': { name: 'UAE Dirham (AED)', flag: '🇦🇪', code: 'AED' },
                 'INR': { name: 'Indian Rupee (INR)', flag: '🇮🇳', code: 'INR' },
                 'USD': { name: 'US Dollar (USD)', flag: '🇺🇸', code: 'USD' }
             };
             
             const info = currencyInfo[currency];
-            targetLabel.textContent = info.name;
-            targetFlag.textContent = info.flag;
-            targetCode.textContent = info.code;
-            exchangeRateEl.textContent = `1 GEL = ${exchangeRates[currency]} ${currency}`;
+            if (position === 'top') {
+                document.getElementById('topCurrencyLabel').textContent = info.name;
+                document.getElementById('topFlag').textContent = info.flag;
+                document.getElementById('topCode').textContent = info.code;
+            } else {
+                document.getElementById('bottomCurrencyLabel').textContent = info.name;
+                document.getElementById('bottomFlag').textContent = info.flag;
+                document.getElementById('bottomCode').textContent = info.code;
+            }
             
-            // Recalculate with new currency
-            const gelValue = parseFloat(document.getElementById('gelInput').value);
-            if (gelValue) {
-                convertCurrency('gel');
+            // Update exchange rate display
+            if (topCurrency === bottomCurrency) {
+                document.getElementById('exchangeRate').textContent = `1 ${topCurrency} = 1 ${bottomCurrency}`;
+            } else {
+                const rate = exchangeRates[topCurrency][bottomCurrency];
+                document.getElementById('exchangeRate').textContent = `1 ${topCurrency} = ${rate} ${bottomCurrency}`;
+            }
+        }
+        
+        function changeTargetCurrency(currency) {
+            // Determine which position has GEL and update the other
+            if (topCurrency === 'GEL') {
+                bottomCurrency = currency;
+                updateCurrencyDisplay('bottom', currency);
+            } else {
+                topCurrency = currency;
+                updateCurrencyDisplay('top', currency);
+            }
+            
+            // Recalculate conversion
+            if (document.getElementById('topInput').value) {
+                convertCurrency('top');
+            } else if (document.getElementById('bottomInput').value) {
+                convertCurrency('bottom');
             }
         }
         
