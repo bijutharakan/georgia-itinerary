@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate PWA Icons</title>
+</head>
+<body>
+    <h2>Generate Icons for PWA - Currency Converter Style</h2>
+    <p>Click each icon to download:</p>
+    <div style="display: flex; gap: 20px; align-items: center;">
+        <div>
+            <p>192x192 (for Android/Chrome)</p>
+            <canvas id="icon192" width="192" height="192"></canvas>
+        </div>
+        <div>
+            <p>512x512 (for splash screens)</p>
+            <canvas id="icon512" width="512" height="512"></canvas>
+        </div>
+    </div>
+    
+    <script>
+        function drawIcon(canvasId, size) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, size, size);
+            
+            // Create circular gradient background (like the currency FAB)
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#FFD93D');
+            gradient.addColorStop(1, '#6BCB77');
+            
+            // Draw circle
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Add subtle shadow effect
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.15)';
+            ctx.shadowBlur = size * 0.05;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = size * 0.02;
+            
+            // Draw Georgian Lari symbol (₾)
+            ctx.shadowColor = 'transparent';
+            ctx.fillStyle = 'white';
+            ctx.font = `bold ${size * 0.45}px Georgia, serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('₾', size / 2, size / 2);
+            
+            // Style the canvas
+            canvas.style.border = '2px solid #e0e0e0';
+            canvas.style.borderRadius = '10px';
+            canvas.style.margin = '10px';
+            canvas.style.cursor = 'pointer';
+            canvas.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+            
+            // Make downloadable on click
+            canvas.onclick = function() {
+                const link = document.createElement('a');
+                link.download = `icon-${size}.png`;
+                link.href = canvas.toDataURL();
+                link.click();
+            };
+        }
+        
+        // Generate both icons
+        drawIcon('icon192', 192);
+        drawIcon('icon512', 512);
+    </script>
+</body>
+</html>
