@@ -835,10 +835,335 @@
             background: rgba(255, 217, 61, 0.2);
             color: #FFD93D;
         }
+        
+        /* Currency Converter Floating Button */
+        .currency-fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #FFD93D, #6BCB77);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            z-index: 150;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1.5rem;
+        }
+        
+        .currency-fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .currency-fab:active {
+            transform: scale(0.95);
+        }
+        
+        /* Currency Converter Modal */
+        .currency-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 300;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .currency-modal.active {
+            display: flex;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .currency-container {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .currency-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .currency-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .currency-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #f7fafc;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .currency-close:hover {
+            background: #e2e8f0;
+        }
+        
+        .currency-input-group {
+            margin-bottom: 20px;
+        }
+        
+        .currency-label {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .currency-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: #f7fafc;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+        
+        .currency-input-wrapper:focus-within {
+            border-color: #4D96FF;
+            background: white;
+        }
+        
+        .currency-flag {
+            padding: 0 12px;
+            font-size: 1.5rem;
+        }
+        
+        .currency-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 12px 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            outline: none;
+        }
+        
+        .currency-input::placeholder {
+            color: #cbd5e0;
+        }
+        
+        .currency-code {
+            padding: 0 12px;
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+        
+        .currency-swap {
+            display: flex;
+            justify-content: center;
+            margin: -10px 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .currency-swap-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .currency-swap-btn:hover {
+            transform: rotate(180deg);
+            border-color: #4D96FF;
+            background: #f0f9ff;
+        }
+        
+        .currency-rates {
+            background: #f0f9ff;
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 20px;
+        }
+        
+        .currency-rate-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            font-size: 0.85rem;
+        }
+        
+        .currency-rate-label {
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .currency-rate-value {
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .currency-quick-amounts {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        
+        .quick-amount {
+            padding: 6px 12px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            color: #4a5568;
+        }
+        
+        .quick-amount:hover {
+            background: #4D96FF;
+            color: white;
+            border-color: #4D96FF;
+        }
 
     </style>
 </head>
 <body>
+    <!-- Currency Converter Button -->
+    <div class="currency-fab" onclick="toggleCurrencyConverter()">
+        ₾
+    </div>
+    
+    <!-- Currency Converter Modal -->
+    <div class="currency-modal" id="currencyModal" onclick="closeCurrencyModal(event)">
+        <div class="currency-container" onclick="event.stopPropagation()">
+            <div class="currency-header">
+                <div class="currency-title">
+                    <span>💱</span>
+                    Currency Converter
+                </div>
+                <button class="currency-close" onclick="closeCurrencyConverter()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="currency-input-group">
+                <div class="currency-label">Georgian Lari (GEL)</div>
+                <div class="currency-input-wrapper">
+                    <span class="currency-flag">🇬🇪</span>
+                    <input type="number" class="currency-input" id="gelInput" placeholder="0.00" oninput="convertCurrency('gel')">
+                    <span class="currency-code">GEL</span>
+                </div>
+            </div>
+            
+            <div class="currency-swap">
+                <button class="currency-swap-btn" onclick="swapCurrencies()">
+                    <i class="fas fa-exchange-alt" style="color: #4a5568;"></i>
+                </button>
+            </div>
+            
+            <div class="currency-input-group">
+                <div class="currency-label" id="targetCurrencyLabel">UAE Dirham (AED)</div>
+                <div class="currency-input-wrapper">
+                    <span class="currency-flag" id="targetFlag">🇦🇪</span>
+                    <input type="number" class="currency-input" id="targetInput" placeholder="0.00" oninput="convertCurrency('target')">
+                    <span class="currency-code" id="targetCode">AED</span>
+                </div>
+            </div>
+            
+            <div class="currency-quick-amounts">
+                <button class="quick-amount" onclick="setQuickAmount(10)">10 ₾</button>
+                <button class="quick-amount" onclick="setQuickAmount(20)">20 ₾</button>
+                <button class="quick-amount" onclick="setQuickAmount(50)">50 ₾</button>
+                <button class="quick-amount" onclick="setQuickAmount(100)">100 ₾</button>
+                <button class="quick-amount" onclick="setQuickAmount(200)">200 ₾</button>
+                <button class="quick-amount" onclick="setQuickAmount(500)">500 ₾</button>
+            </div>
+            
+            <div class="currency-rates">
+                <div class="currency-rate-item">
+                    <span class="currency-rate-label">
+                        <i class="fas fa-info-circle" style="color: #4D96FF;"></i>
+                        Exchange Rate
+                    </span>
+                    <span class="currency-rate-value" id="exchangeRate">1 GEL = 1.35 AED</span>
+                </div>
+                <div class="currency-rate-item">
+                    <span class="currency-rate-label">
+                        <i class="fas fa-rupee-sign" style="color: #6BCB77;"></i>
+                        INR Rate
+                    </span>
+                    <span class="currency-rate-value" id="inrRate">1 GEL = 30.5 INR</span>
+                </div>
+                <div class="currency-rate-item">
+                    <span class="currency-rate-label">
+                        <i class="fas fa-dollar-sign" style="color: #FFD93D;"></i>
+                        USD Rate
+                    </span>
+                    <span class="currency-rate-value" id="usdRate">1 GEL = 0.37 USD</span>
+                </div>
+                <div class="currency-rate-item" style="margin-top: 8px; padding-top: 12px; border-top: 1px solid #cbd5e0;">
+                    <span class="currency-rate-label">
+                        <i class="fas fa-sync-alt" style="color: #718096;"></i>
+                        Switch to
+                    </span>
+                    <select onchange="changeTargetCurrency(this.value)" style="background: #4D96FF; color: white; border: none; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; cursor: pointer; font-weight: 600;">
+                        <option value="AED">AED</option>
+                        <option value="INR">INR</option>
+                        <option value="USD">USD</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <!-- Checklist Panel -->
     <div class="checklist-panel" id="checklistPanel">
@@ -3119,45 +3444,114 @@
         }
 
 
-        // Touch gestures for swipe
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        document.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        document.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
-
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0 && currentDay < 9) {
-                    selectDay(currentDay + 1);
-                } else if (diff < 0 && currentDay > 0) {
-                    selectDay(currentDay - 1);
-                }
-            }
-        }
+        // Swipe functionality removed to prevent accidental page changes
 
         // Auto-archive past days
         function checkDates() {
             const today = new Date();
-            const tripStart = new Date('2025-08-10');
+            const tripStart = new Date('2025-08-09'); // Trip starts Aug 9
+            const tripEnd = new Date('2025-08-18');
             const daysDiff = Math.floor((today - tripStart) / (1000 * 60 * 60 * 24));
             
-            if (daysDiff >= 0 && daysDiff < 9) {
-                selectDay(daysDiff + 1);
+            if (today < tripStart) {
+                // Before trip - show Guide
+                selectDay(0);
+            } else if (today > tripEnd) {
+                // After trip - show Guide
+                selectDay(0);
+            } else if (daysDiff >= 0 && daysDiff <= 9) {
+                // During trip - show current day (Aug 9 = Day 0 in dates, but Day 1 in selector)
+                // Aug 9 (day 0) -> no Day 0, skip to Day 1
+                // Aug 10 (day 1) -> Day 1 (index 1)
+                // Aug 11 (day 2) -> Day 2 (index 2)
+                // etc.
+                if (daysDiff === 0) {
+                    selectDay(1); // Aug 9 doesn't have content, show Aug 10
+                } else {
+                    selectDay(daysDiff); // Show the appropriate day
+                }
             } else {
-                selectDay(0); // Show Guide by default before trip
+                selectDay(0); // Default to Guide
             }
         }
 
+        // Currency Converter Functions
+        let currentTargetCurrency = 'AED';
+        const exchangeRates = {
+            'AED': 1.35,
+            'INR': 30.5,
+            'USD': 0.37
+        };
+        
+        function toggleCurrencyConverter() {
+            const modal = document.getElementById('currencyModal');
+            modal.classList.add('active');
+        }
+        
+        function closeCurrencyConverter() {
+            const modal = document.getElementById('currencyModal');
+            modal.classList.remove('active');
+        }
+        
+        function closeCurrencyModal(event) {
+            if (event.target === event.currentTarget) {
+                closeCurrencyConverter();
+            }
+        }
+        
+        function convertCurrency(source) {
+            const gelInput = document.getElementById('gelInput');
+            const targetInput = document.getElementById('targetInput');
+            const rate = exchangeRates[currentTargetCurrency];
+            
+            if (source === 'gel') {
+                const gelValue = parseFloat(gelInput.value) || 0;
+                targetInput.value = (gelValue * rate).toFixed(2);
+            } else {
+                const targetValue = parseFloat(targetInput.value) || 0;
+                gelInput.value = (targetValue / rate).toFixed(2);
+            }
+        }
+        
+        function setQuickAmount(amount) {
+            document.getElementById('gelInput').value = amount;
+            convertCurrency('gel');
+        }
+        
+        function swapCurrencies() {
+            const gelInput = document.getElementById('gelInput');
+            const targetInput = document.getElementById('targetInput');
+            const tempValue = gelInput.value;
+            gelInput.value = targetInput.value;
+            targetInput.value = tempValue;
+        }
+        
+        function changeTargetCurrency(currency) {
+            currentTargetCurrency = currency;
+            const targetLabel = document.getElementById('targetCurrencyLabel');
+            const targetFlag = document.getElementById('targetFlag');
+            const targetCode = document.getElementById('targetCode');
+            const exchangeRateEl = document.getElementById('exchangeRate');
+            
+            const currencyInfo = {
+                'AED': { name: 'UAE Dirham (AED)', flag: '🇦🇪', code: 'AED' },
+                'INR': { name: 'Indian Rupee (INR)', flag: '🇮🇳', code: 'INR' },
+                'USD': { name: 'US Dollar (USD)', flag: '🇺🇸', code: 'USD' }
+            };
+            
+            const info = currencyInfo[currency];
+            targetLabel.textContent = info.name;
+            targetFlag.textContent = info.flag;
+            targetCode.textContent = info.code;
+            exchangeRateEl.textContent = `1 GEL = ${exchangeRates[currency]} ${currency}`;
+            
+            // Recalculate with new currency
+            const gelValue = parseFloat(document.getElementById('gelInput').value);
+            if (gelValue) {
+                convertCurrency('gel');
+            }
+        }
+        
         // Check dates on load
         window.addEventListener('load', () => {
             checkDates();
@@ -3175,7 +3569,8 @@
                 { id: 'insurance', text: '🛡️ Buy travel insurance (Aug 1-2)', date: '2025-08-01', completed: false },
                 { id: 'currency', text: '💵 Exchange currency (AED → GEL/USD)', completed: false },
                 { id: 'mobile', text: '📶 Setup mobile/data (eSIM/Roaming/Local)', completed: false },
-                { id: 'adapters', text: '🔌 Buy power adapters (Type C/F Euro plug)', completed: false }
+                { id: 'adapters', text: '🔌 Buy power adapters (Type C/F Euro plug)', completed: false },
+                { id: 'online-checkin-return', text: '✈️ Online check-in for return flight (Aug 16)', date: '2025-08-16', completed: false }
             ],
             'Packing': [
                 { id: 'documents', text: '📄 Documents: Passport, visa, tickets, insurance, ID', completed: false },
