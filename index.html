@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Georgia Trip • Aug 10-18</title>
+    <title>Georgia Trip • Aug 10-18, 2025</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -15,32 +15,21 @@
         }
 
         :root {
-            --bg-gradient: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #45B7D1 100%);
-            --card-bg: rgba(255, 255, 255, 0.98);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
             --text-primary: #2d3748;
             --text-secondary: #718096;
-            --accent-1: #FF6B6B;
-            --accent-2: #4ECDC4;
-            --accent-3: #45B7D1;
-            --accent-4: #FFA07A;
-            --accent-5: #98D8C8;
-            --success: #06D6A0;
-            --warning: #FFD93D;
-            --danger: #FF6B6B;
-            --info: #6C5CE7;
+            --accent-purple: #667eea;
+            --accent-violet: #764ba2;
+            --success: #48bb78;
+            --warning: #f6ad55;
             --shadow-soft: 0 4px 6px rgba(0, 0, 0, 0.07);
             --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
-            --shadow-large: 0 20px 40px rgba(0, 0, 0, 0.15);
-            --gradient-sunset: linear-gradient(135deg, #FA709A 0%, #FEE140 100%);
-            --gradient-ocean: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
-            --gradient-berry: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-peach: linear-gradient(135deg, #FBAB7E 0%, #F7CE68 100%);
-            --gradient-mint: linear-gradient(135deg, #0ED2F7 0%, #B2FEFA 100%);
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: var(--bg-gradient);
+            background: var(--gradient);
             min-height: 100vh;
             color: var(--text-primary);
             overflow-x: hidden;
@@ -54,47 +43,21 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(255, 107, 107, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(78, 205, 196, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(69, 183, 209, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 60% 60%, rgba(255, 160, 122, 0.2) 0%, transparent 50%);
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,32L48,37.3C96,43,192,53,288,90.7C384,128,480,192,576,192C672,192,768,128,864,112C960,96,1056,128,1152,138.7C1248,149,1344,139,1392,133.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
             pointer-events: none;
-            animation: floatGradient 20s ease-in-out infinite;
-        }
-
-        @keyframes floatGradient {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(-20px, -20px) rotate(120deg); }
-            66% { transform: translate(20px, -10px) rotate(240deg); }
-        }
-
-        /* Sparkle effect */
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1); }
-        }
-
-        .sparkle {
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background: white;
-            border-radius: 50%;
-            pointer-events: none;
-            animation: sparkle 3s ease-in-out infinite;
+            opacity: 0.3;
         }
 
         /* Header */
         .header {
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.95), rgba(78, 205, 196, 0.95));
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             padding: 15px 20px;
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .header-content {
@@ -105,50 +68,27 @@
 
         .header-title {
             color: white;
-            font-size: 1.3rem;
-            font-weight: 700;
+            font-size: 1.2rem;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 10px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .header-title i {
-            font-size: 1.4rem;
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
+            gap: 8px;
         }
 
         .header-date {
-            color: white;
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 4px 12px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.85rem;
+            font-weight: 400;
         }
 
-        /* Day Selector - Moved to bottom */
+        /* Day Selector */
         .day-selector {
-            position: fixed;
-            bottom: 70px;
-            left: 0;
-            right: 0;
             padding: 15px;
             display: flex;
-            gap: 12px;
+            gap: 10px;
             overflow-x: auto;
             scrollbar-width: none;
             -webkit-overflow-scrolling: touch;
-            background: linear-gradient(to top, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
-            backdrop-filter: blur(10px);
-            border-top: 2px solid rgba(78, 205, 196, 0.3);
-            z-index: 99;
         }
 
         .day-selector::-webkit-scrollbar {
@@ -157,34 +97,15 @@
 
         .day-card {
             flex: 0 0 auto;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
-            border-radius: 20px;
-            padding: 12px 18px;
-            min-width: 90px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 15px 20px;
+            min-width: 100px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--shadow-soft);
             border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .day-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--gradient-ocean);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-
-        .day-card:hover::before {
-            opacity: 0.1;
         }
 
         .day-card:active {
@@ -192,16 +113,9 @@
         }
 
         .day-card.active {
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            border-color: transparent;
-            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
-            transform: scale(1.05);
-        }
-
-        .day-card.active .day-num,
-        .day-card.active .day-date,
-        .day-card.active .day-location {
-            color: white !important;
+            background: white;
+            border-color: var(--accent-purple);
+            box-shadow: var(--shadow-medium);
         }
 
         .day-card .day-num {
@@ -213,28 +127,25 @@
         }
 
         .day-card .day-date {
-            font-size: 1.3rem;
-            font-weight: 700;
+            font-size: 1.2rem;
+            font-weight: 600;
             color: var(--text-primary);
             margin-bottom: 5px;
         }
 
         .day-card .day-location {
             font-size: 0.85rem;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 600;
+            color: var(--accent-purple);
+            font-weight: 500;
         }
 
         .day-card.active .day-num {
-            color: var(--accent-1);
+            color: var(--accent-purple);
         }
 
         /* Content Container */
         .content-container {
-            padding: 0 15px 180px;
+            padding: 0 15px 100px;
             max-width: 500px;
             margin: 0 auto;
         }
@@ -261,46 +172,26 @@
 
         /* Location Badge */
         .location-badge {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
-            border-radius: 25px;
-            padding: 18px 22px;
+            background: white;
+            border-radius: 20px;
+            padding: 15px 20px;
             margin-bottom: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-medium);
             display: flex;
             align-items: center;
-            gap: 15px;
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            position: relative;
-        }
-
-        .location-badge::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 25px;
-            padding: 2px;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0.3;
+            gap: 12px;
         }
 
         .location-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 15px;
-            background: var(--gradient-sunset);
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: var(--gradient);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.3rem;
-            box-shadow: 0 4px 15px rgba(250, 112, 154, 0.3);
+            font-size: 1.2rem;
         }
 
         .location-info h2 {
@@ -314,107 +205,14 @@
             color: var(--text-secondary);
         }
 
-        /* Quick Stats */
-        .quick-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
-            border-radius: 15px;
-            padding: 12px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(78, 205, 196, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(78, 205, 196, 0.1) 0%, transparent 70%);
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(0.8); opacity: 0; }
-            50% { transform: scale(1); opacity: 1; }
-        }
-
-        .stat-icon {
-            width: 36px;
-            height: 36px;
-            margin: 0 auto 8px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-        }
-
-        .stat-icon.activities {
-            background: var(--gradient-berry);
-            color: white;
-            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
-        }
-
-        .stat-icon.duration {
-            background: var(--gradient-peach);
-            color: white;
-            box-shadow: 0 4px 10px rgba(251, 171, 126, 0.3);
-        }
-
-        .stat-icon.budget {
-            background: var(--gradient-mint);
-            color: white;
-            box-shadow: 0 4px 10px rgba(14, 210, 247, 0.3);
-        }
-
-        .stat-value {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 2px;
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-
         /* Activity Cards */
         .activity-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
+            background: white;
             border-radius: 20px;
             margin-bottom: 15px;
             overflow: hidden;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--shadow-medium);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(78, 205, 196, 0.15);
-            position: relative;
-        }
-
-        .activity-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .activity-card:hover::after {
-            left: 100%;
         }
 
         .activity-card:active {
@@ -430,15 +228,14 @@
         }
 
         .activity-time {
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            background: var(--gradient);
             color: white;
             padding: 8px 12px;
-            border-radius: 12px;
+            border-radius: 10px;
             font-weight: 600;
             font-size: 0.85rem;
-            min-width: 65px;
+            min-width: 60px;
             text-align: center;
-            box-shadow: 0 3px 10px rgba(255, 107, 107, 0.3);
         }
 
         .activity-info {
@@ -462,10 +259,7 @@
 
         .activity-subtitle i {
             font-size: 0.75rem;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--accent-purple);
         }
 
         .activity-expand {
@@ -506,25 +300,22 @@
         }
 
         .tag {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15));
-            color: #667eea;
-            padding: 6px 14px;
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--accent-purple);
+            padding: 5px 12px;
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 500;
-            border: 1px solid rgba(102, 126, 234, 0.2);
         }
 
         .tag.price {
-            background: linear-gradient(135deg, rgba(6, 214, 160, 0.15), rgba(72, 187, 120, 0.15));
+            background: rgba(72, 187, 120, 0.1);
             color: var(--success);
-            border: 1px solid rgba(6, 214, 160, 0.2);
         }
 
         .tag.duration {
-            background: linear-gradient(135deg, rgba(255, 217, 61, 0.15), rgba(251, 171, 126, 0.15));
-            color: #f59e0b;
-            border: 1px solid rgba(255, 217, 61, 0.2);
+            background: rgba(246, 173, 85, 0.1);
+            color: var(--warning);
         }
 
         .activity-actions {
@@ -549,15 +340,13 @@
         }
 
         .action-btn.primary {
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            background: var(--gradient);
             color: white;
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
         }
 
         .action-btn.secondary {
-            background: linear-gradient(135deg, rgba(69, 183, 209, 0.1), rgba(78, 205, 196, 0.1));
-            color: var(--accent-3);
-            border: 1px solid rgba(69, 183, 209, 0.2);
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--accent-purple);
         }
 
         .action-btn:active {
@@ -566,15 +355,14 @@
 
         /* Transport Alert */
         .alert-card {
-            background: linear-gradient(135deg, rgba(255, 217, 61, 0.2), rgba(255, 160, 122, 0.2));
+            background: linear-gradient(135deg, #fef5e7, #fdebd0);
             border-left: 4px solid var(--warning);
-            border-radius: 15px;
-            padding: 14px 16px;
+            border-radius: 12px;
+            padding: 12px 15px;
             margin-bottom: 20px;
             display: flex;
             align-items: start;
             gap: 12px;
-            box-shadow: 0 4px 15px rgba(255, 217, 61, 0.15);
         }
 
         .alert-icon {
@@ -606,14 +394,13 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
-            backdrop-filter: blur(15px);
-            border-top: 2px solid rgba(78, 205, 196, 0.2);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
             padding: 10px 20px 25px;
             display: flex;
             justify-content: space-around;
             z-index: 100;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
         }
 
         .nav-item {
@@ -630,18 +417,7 @@
         }
 
         .nav-item.active {
-            color: transparent;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-item.active i {
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--accent-purple);
         }
 
         .nav-item i {
@@ -653,148 +429,114 @@
             font-weight: 500;
         }
 
-
-        /* Floating Buttons */
-        .theme-toggle,
-        .menu-toggle {
-            position: fixed;
-            right: 15px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
-            backdrop-filter: blur(10px);
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 101;
-            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.2);
-        }
-
-        .theme-toggle {
-            top: 80px;
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1)),
-                        linear-gradient(135deg, white, white);
-        }
-
-        .menu-toggle {
-            top: 130px;
-            background: linear-gradient(135deg, rgba(69, 183, 209, 0.1), rgba(255, 160, 122, 0.1)),
-                        linear-gradient(135deg, white, white);
-        }
-
-        .theme-toggle:active,
-        .menu-toggle:active {
-            transform: scale(0.9);
-        }
-
-        .theme-toggle i,
-        .menu-toggle i {
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 1.1rem;
-        }
-
-        /* Menu Overlay */
-        .menu-overlay {
+        /* Tips Modal */
+        .tips-modal {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.95), rgba(78, 205, 196, 0.95));
-            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.5);
             z-index: 200;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            padding: 20px;
+            overflow-y: auto;
         }
 
-        .menu-overlay.active {
+        .tips-modal.active {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            opacity: 1;
+            justify-content: center;
         }
 
-        .menu-content {
-            text-align: center;
-            color: white;
+        .tips-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 20px;
         }
 
-        .menu-content h2 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            font-weight: 700;
+        .tips-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
         }
 
-        .menu-item {
-            display: block;
-            padding: 15px 30px;
-            margin: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            color: white;
-            text-decoration: none;
+        .tips-header h2 {
+            color: var(--accent-purple);
+            font-size: 1.5rem;
+        }
+
+        .close-tips {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .tip-category {
+            margin-bottom: 25px;
+        }
+
+        .tip-category h3 {
+            color: var(--accent-violet);
             font-size: 1.1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .menu-item:active {
-            transform: scale(0.95);
-            background: rgba(255, 255, 255, 0.3);
+        .tip-category i {
+            font-size: 1rem;
         }
 
-        /* Loading skeleton */
-        .skeleton {
-            background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
+        .tip-list {
+            list-style: none;
         }
 
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+        .tip-list li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .tip-list li:before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-purple);
         }
     </style>
 </head>
 <body>
-    <!-- Theme Toggle -->
-    <button class="theme-toggle" onclick="toggleTheme()" title="Change Theme">
-        <i class="fas fa-palette" id="themeIcon"></i>
-    </button>
-
-    <!-- Menu Button -->
-    <button class="menu-toggle" onclick="toggleMenu()" title="Menu">
-        <i class="fas fa-bars" id="menuIcon"></i>
-    </button>
-
     <!-- Header -->
     <div class="header">
         <div class="header-content">
             <div class="header-title">
-                <i class="fas fa-mountain-sun"></i>
-                <span>Georgia</span>
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Georgia Adventure</span>
             </div>
             <div class="header-date">Aug 10-18, 2025</div>
         </div>
     </div>
 
-    <!-- Day Selector at Bottom -->
+    <!-- Day Selector -->
     <div class="day-selector" id="daySelector">
         <div class="day-card active" onclick="selectDay(1)">
             <div class="day-num">SAT</div>
             <div class="day-date">10</div>
-            <div class="day-location">Batumi</div>
+            <div class="day-location">Arrival</div>
         </div>
         <div class="day-card" onclick="selectDay(2)">
             <div class="day-num">SUN</div>
@@ -804,7 +546,7 @@
         <div class="day-card" onclick="selectDay(3)">
             <div class="day-num">MON</div>
             <div class="day-date">12</div>
-            <div class="day-location">Tbilisi</div>
+            <div class="day-location">→ Tbilisi</div>
         </div>
         <div class="day-card" onclick="selectDay(4)">
             <div class="day-num">TUE</div>
@@ -814,7 +556,7 @@
         <div class="day-card" onclick="selectDay(5)">
             <div class="day-num">WED</div>
             <div class="day-date">14</div>
-            <div class="day-location">Tbilisi</div>
+            <div class="day-location">Mtskheta</div>
         </div>
         <div class="day-card" onclick="selectDay(6)">
             <div class="day-num">THU</div>
@@ -824,7 +566,7 @@
         <div class="day-card" onclick="selectDay(7)">
             <div class="day-num">FRI</div>
             <div class="day-date">16</div>
-            <div class="day-location">Kutaisi</div>
+            <div class="day-location">→ Kutaisi</div>
         </div>
         <div class="day-card" onclick="selectDay(8)">
             <div class="day-num">SAT</div>
@@ -840,7 +582,7 @@
 
     <!-- Content Container -->
     <div class="content-container">
-        <!-- Day 1 Content -->
+        <!-- Day 1: Arrival & Batumi -->
         <div class="day-content active" id="day1">
             <div class="location-badge">
                 <div class="location-icon">
@@ -849,30 +591,6 @@
                 <div class="location-info">
                     <h2>Kutaisi → Batumi</h2>
                     <p>Arrival & Black Sea Coast</p>
-                </div>
-            </div>
-
-            <div class="quick-stats">
-                <div class="stat-card">
-                    <div class="stat-icon activities">
-                        <i class="fas fa-list"></i>
-                    </div>
-                    <div class="stat-value">4</div>
-                    <div class="stat-label">Activities</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon duration">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="stat-value">8h</div>
-                    <div class="stat-label">Active Time</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon budget">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <div class="stat-value">60₾</div>
-                    <div class="stat-label">Est. Cost</div>
                 </div>
             </div>
 
@@ -886,11 +604,11 @@
 
             <div class="activity-card" onclick="toggleCard(this)">
                 <div class="activity-header">
-                    <div class="activity-time">14:30</div>
+                    <div class="activity-time">10:00</div>
                     <div class="activity-info">
-                        <div class="activity-title">Check-in Batumi</div>
+                        <div class="activity-title">Arrival at Kutaisi Airport</div>
                         <div class="activity-subtitle">
-                            <i class="fas fa-bed"></i> Boulevard Hotel
+                            <i class="fas fa-plane"></i> International Airport
                         </div>
                     </div>
                     <i class="fas fa-chevron-down activity-expand"></i>
@@ -898,7 +616,56 @@
                 <div class="activity-details">
                     <div class="activity-content">
                         <p class="activity-description">
-                            Arrive in Batumi and check into your hotel near the boulevard for easy beach access.
+                            Arrive at David the Builder Kutaisi International Airport. Exchange money at the airport (better rates in the city).
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag">Airport</span>
+                            <span class="tag duration">30 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">12:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Georgian Bus to Batumi</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-bus"></i> Comfortable Coach
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Take the Georgian Bus from Kutaisi to Batumi. Book tickets online or at the station. Journey through beautiful Georgian countryside.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">15-20₾</span>
+                            <span class="tag duration">2.5 hours</span>
+                            <span class="tag">Scenic Route</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">14:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Check-in Batumi</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-bed"></i> Hotel near Boulevard
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Check into your hotel in Batumi. Choose accommodation near the boulevard for easy beach access and evening walks.
                         </p>
                         <div class="activity-tags">
                             <span class="tag">Hotel</span>
@@ -922,7 +689,7 @@
                 <div class="activity-details">
                     <div class="activity-content">
                         <p class="activity-description">
-                            Stroll along the seaside boulevard and watch the moving Ali & Nino statue - it rotates every 10 minutes!
+                            Stroll along the seaside boulevard. See the moving Ali & Nino statue that rotates every 10 minutes, symbolizing eternal love.
                         </p>
                         <div class="activity-tags">
                             <span class="tag price">FREE</span>
@@ -930,40 +697,7 @@
                             <span class="tag">Must See</span>
                         </div>
                         <div class="activity-actions">
-                            <a href="https://maps.google.com/?q=Batumi+Boulevard" class="action-btn primary">
-                                <i class="fas fa-map-marked-alt"></i> Open Map
-                            </a>
-                            <button class="action-btn secondary">
-                                <i class="fas fa-camera"></i> Photos
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="activity-card" onclick="toggleCard(this)">
-                <div class="activity-header">
-                    <div class="activity-time">17:00</div>
-                    <div class="activity-info">
-                        <div class="activity-title">Piazza Square</div>
-                        <div class="activity-subtitle">
-                            <i class="fas fa-utensils"></i> Dinner & Live Music
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-down activity-expand"></i>
-                </div>
-                <div class="activity-details">
-                    <div class="activity-content">
-                        <p class="activity-description">
-                            Italian-style square with restaurants and cafes. Perfect for your first Georgian dinner!
-                        </p>
-                        <div class="activity-tags">
-                            <span class="tag price">20-40₾</span>
-                            <span class="tag duration">1.5 hours</span>
-                            <span class="tag">Live Music</span>
-                        </div>
-                        <div class="activity-actions">
-                            <a href="https://maps.google.com/?q=Piazza+Square+Batumi" class="action-btn primary">
+                            <a href="https://maps.google.com/?q=Ali+and+Nino+Statue+Batumi" class="action-btn primary">
                                 <i class="fas fa-map-marked-alt"></i> Open Map
                             </a>
                         </div>
@@ -975,6 +709,164 @@
                 <div class="activity-header">
                     <div class="activity-time">19:00</div>
                     <div class="activity-info">
+                        <div class="activity-title">Piazza Square</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-utensils"></i> Dinner & Live Music
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Italian-style square with mosaics, cafes, and live music. Perfect for your first Georgian dinner. Try khachapuri and local wine!
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">30-50₾</span>
+                            <span class="tag duration">2 hours</span>
+                            <span class="tag">Live Music</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Piazza+Square+Batumi" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 2: Batumi Full Day -->
+        <div class="day-content" id="day2">
+            <div class="location-badge">
+                <div class="location-icon">
+                    <i class="fas fa-umbrella-beach"></i>
+                </div>
+                <div class="location-info">
+                    <h2>Batumi Exploration</h2>
+                    <p>Beach, Gardens & Cable Car</p>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">09:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Batumi Botanical Garden</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-leaf"></i> 111 Hectares of Nature
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            One of the largest botanical gardens in the former Soviet Union. Features 9 phyto-geographic sections with stunning sea views.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">15₾</span>
+                            <span class="tag duration">3 hours</span>
+                            <span class="tag">Nature</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Batumi+Botanical+Garden" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">13:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Lunch at Beach</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-fish"></i> Fresh Seafood
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Enjoy fresh Black Sea fish at a beachside restaurant. Try the local specialty - fish in Adjarian style.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">25-40₾</span>
+                            <span class="tag duration">1 hour</span>
+                            <span class="tag">Seafood</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">15:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Argo Cable Car</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-mountain"></i> Panoramic Views
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Take the cable car to Anuria Mountain for breathtaking views of Batumi and the Black Sea. Restaurant and viewing platforms at the top.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">20₾</span>
+                            <span class="tag duration">2 hours</span>
+                            <span class="tag">Views</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Argo+Cable+Car+Batumi" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">18:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Alphabet Tower</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-monument"></i> Unique Architecture
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            130-meter tower celebrating Georgian alphabet and people. The structure combines the design of DNA and Georgian script.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">10₾</span>
+                            <span class="tag duration">45 min</span>
+                            <span class="tag">Architecture</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Alphabetic+Tower+Batumi" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">20:00</div>
+                    <div class="activity-info">
                         <div class="activity-title">Dancing Fountains</div>
                         <div class="activity-subtitle">
                             <i class="fas fa-music"></i> Evening Show
@@ -985,12 +877,12 @@
                 <div class="activity-details">
                     <div class="activity-content">
                         <p class="activity-description">
-                            Musical fountain show with lights - a magical end to your first day!
+                            Musical fountain show with lights and laser effects. One of the main attractions on Batumi Boulevard.
                         </p>
                         <div class="activity-tags">
                             <span class="tag price">FREE</span>
                             <span class="tag duration">30 min</span>
-                            <span class="tag">Family Friendly</span>
+                            <span class="tag">Entertainment</span>
                         </div>
                         <div class="activity-actions">
                             <a href="https://maps.google.com/?q=Dancing+Fountains+Batumi" class="action-btn primary">
@@ -1002,46 +894,1273 @@
             </div>
         </div>
 
-        <!-- Day 2 Content -->
-        <div class="day-content" id="day2">
+        <!-- Day 3: Batumi to Tbilisi -->
+        <div class="day-content" id="day3">
             <div class="location-badge">
                 <div class="location-icon">
-                    <i class="fas fa-leaf"></i>
+                    <i class="fas fa-train"></i>
                 </div>
                 <div class="location-info">
-                    <h2>Batumi Nature Day</h2>
-                    <p>Botanical Garden & Cable Car</p>
+                    <h2>Batumi → Tbilisi</h2>
+                    <p>Train Journey to Capital</p>
                 </div>
             </div>
 
-            <div class="quick-stats">
-                <div class="stat-card">
-                    <div class="stat-icon activities">
-                        <i class="fas fa-list"></i>
-                    </div>
-                    <div class="stat-value">5</div>
-                    <div class="stat-label">Activities</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon duration">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="stat-value">10h</div>
-                    <div class="stat-label">Active Time</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon budget">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <div class="stat-value">100₾</div>
-                    <div class="stat-label">Est. Cost</div>
+            <div class="alert-card">
+                <i class="fas fa-exclamation-triangle alert-icon"></i>
+                <div class="alert-content">
+                    <div class="alert-title">Early Train</div>
+                    <div class="alert-text">Train departs at 8:00 AM sharp. 6-hour scenic journey through Georgia.</div>
                 </div>
             </div>
 
-            <!-- Add more Day 2 activities here -->
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">07:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Hotel Checkout</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-suitcase"></i> Prepare for Journey
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Check out from hotel. Grab breakfast and snacks for the train journey.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag duration">30 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">08:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Train to Tbilisi</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-train"></i> Georgian Railway
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Board the train from Batumi to Tbilisi. Comfortable seats, beautiful mountain and valley views. Bring snacks and entertainment.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">25₾</span>
+                            <span class="tag duration">6 hours</span>
+                            <span class="tag">Scenic</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Batumi+Central+Railway+Station" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Station Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">14:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Arrival in Tbilisi</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-city"></i> Capital City
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Arrive at Tbilisi Central Station. Take taxi or metro to your accommodation in the city center.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">10-15₾ taxi</span>
+                            <span class="tag duration">30 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">15:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Check-in & Rest</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-bed"></i> City Center Hotel
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Check into your Tbilisi accommodation. Rest after the journey and freshen up.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag duration">1 hour</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">17:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Old Town Walk</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-walking"></i> Evening Exploration
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Take an evening stroll through Tbilisi's charming Old Town. See the colorful balconies and narrow streets.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">FREE</span>
+                            <span class="tag duration">2 hours</span>
+                            <span class="tag">Historic</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Tbilisi+Old+Town" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">19:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Dinner at Shavi Lomi</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-utensils"></i> Modern Georgian
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Popular restaurant serving modern takes on Georgian classics. Try the lamb chakapuli and homemade wine.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">40-60₾</span>
+                            <span class="tag duration">2 hours</span>
+                            <span class="tag">Recommended</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Shavi+Lomi+Tbilisi" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Add more days (3-9) here following the same pattern -->
+        <!-- Day 4: Tbilisi Exploration -->
+        <div class="day-content" id="day4">
+            <div class="location-badge">
+                <div class="location-icon">
+                    <i class="fas fa-landmark"></i>
+                </div>
+                <div class="location-info">
+                    <h2>Tbilisi City Tour</h2>
+                    <p>Fortresses, Churches & Baths</p>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">09:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Narikala Fortress</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-fort-awesome"></i> 4th Century Fortress
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Ancient fortress overlooking Tbilisi. Take the cable car up for stunning city views. Walk down through the old town.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">2.5₾ cable car</span>
+                            <span class="tag duration">2 hours</span>
+                            <span class="tag">Must See</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Narikala+Fortress+Tbilisi" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">11:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Sulfur Baths District</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-hot-tub"></i> Abanotubani
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Historic bath district with distinctive domed architecture. Option to experience traditional sulfur bath and massage.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">50-100₾ bath</span>
+                            <span class="tag duration">1-2 hours</span>
+                            <span class="tag">Relaxation</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Abanotubani+Tbilisi" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">14:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Lunch at Cafe Littera</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-wine-glass"></i> Garden Restaurant
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Beautiful garden restaurant in the Writers' House. Creative Georgian cuisine with excellent wine selection.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">50-70₾</span>
+                            <span class="tag duration">1.5 hours</span>
+                            <span class="tag">Fine Dining</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Cafe+Littera+Tbilisi" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">16:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Holy Trinity Cathedral</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-church"></i> Sameba Cathedral
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Georgia's main cathedral, completed in 2004. Impressive architecture and beautiful interior with gold decorations.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">FREE</span>
+                            <span class="tag duration">1 hour</span>
+                            <span class="tag">Religious</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Holy+Trinity+Cathedral+Tbilisi" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">18:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Rustaveli Avenue</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-road"></i> Main Boulevard
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Tbilisi's main avenue with shops, cafes, and important buildings. See the Parliament, Opera House, and National Museum.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">FREE</span>
+                            <span class="tag duration">1.5 hours</span>
+                            <span class="tag">Shopping</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Rustaveli+Avenue+Tbilisi" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">20:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Fabrika</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-cocktail"></i> Hip Cultural Space
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Former Soviet sewing factory turned into trendy space with bars, restaurants, shops, and co-working spaces.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">20-40₾</span>
+                            <span class="tag duration">2 hours</span>
+                            <span class="tag">Nightlife</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Fabrika+Tbilisi" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 5: Mtskheta Day Trip -->
+        <div class="day-content" id="day5">
+            <div class="location-badge">
+                <div class="location-icon">
+                    <i class="fas fa-cross"></i>
+                </div>
+                <div class="location-info">
+                    <h2>Mtskheta Day Trip</h2>
+                    <p>Ancient Capital & Monasteries</p>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">09:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Travel to Mtskheta</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-van-shuttle"></i> 20km from Tbilisi
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Take a marshrutka (minibus) from Didube station or join a tour. UNESCO World Heritage site and spiritual heart of Georgia.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">2₾ marshrutka</span>
+                            <span class="tag duration">30 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">10:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Jvari Monastery</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-mountain"></i> 6th Century Monastery
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Hilltop monastery with incredible views over the confluence of two rivers. One of Georgia's most sacred sites.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">FREE</span>
+                            <span class="tag duration">1.5 hours</span>
+                            <span class="tag">UNESCO</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Jvari+Monastery" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">12:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Svetitskhoveli Cathedral</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-church"></i> Christ's Robe Church
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            11th-century cathedral, burial site of Christ's robe. Georgia's second-largest church building and spiritual center.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">FREE</span>
+                            <span class="tag duration">1 hour</span>
+                            <span class="tag">UNESCO</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Svetitskhoveli+Cathedral" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">13:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Lunch in Mtskheta</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-utensils"></i> Traditional Restaurant
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Try local specialties at Salobie restaurant. Famous for lobio (bean stew) served in clay pots.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">25-35₾</span>
+                            <span class="tag duration">1 hour</span>
+                            <span class="tag">Local Food</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">15:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Samtavro Monastery</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-pray"></i> Active Nunnery
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            4th-century monastery complex with beautiful frescoes. Burial place of King Mirian and Queen Nana.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">FREE</span>
+                            <span class="tag duration">45 min</span>
+                            <span class="tag">Historic</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Samtavro+Monastery" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">16:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Return to Tbilisi</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-bus"></i> Back to City
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Return to Tbilisi by marshrutka or taxi. Evening at leisure.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">2₾</span>
+                            <span class="tag duration">30 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">19:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Wine Bar</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-wine-bottle"></i> Vino Underground
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Natural wine bar with excellent selection of Georgian wines. Try different regions and grape varieties.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">30-50₾</span>
+                            <span class="tag duration">2 hours</span>
+                            <span class="tag">Wine Tasting</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Vino+Underground+Tbilisi" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 6: Kazbegi Day Trip -->
+        <div class="day-content" id="day6">
+            <div class="location-badge">
+                <div class="location-icon">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <div class="location-info">
+                    <h2>Kazbegi Mountains</h2>
+                    <p>Georgian Military Highway</p>
+                </div>
+            </div>
+
+            <div class="alert-card">
+                <i class="fas fa-info-circle alert-icon"></i>
+                <div class="alert-content">
+                    <div class="alert-title">Full Day Trip</div>
+                    <div class="alert-text">Early start recommended. Bring warm clothes - mountain weather is unpredictable.</div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">07:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Depart for Kazbegi</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-van-shuttle"></i> Join Tour or Marshrutka
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Start early for the 3-hour journey along the Georgian Military Highway. Book a tour or take marshrutka from Didube.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">15₾ marshrutka</span>
+                            <span class="tag duration">3 hours</span>
+                            <span class="tag">Scenic Drive</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">09:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Ananuri Fortress</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-fort-awesome"></i> 17th Century Castle
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Stop at this picturesque fortress complex overlooking Zhinvali reservoir. Great photo opportunities.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">FREE</span>
+                            <span class="tag duration">30 min</span>
+                            <span class="tag">Photo Stop</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Ananuri+Fortress" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">11:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Arrive in Stepantsminda</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-home"></i> Kazbegi Town
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Arrive in the mountain town at the foot of Mount Kazbek. Hire local 4WD to reach Gergeti Trinity Church.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">60₾ per car</span>
+                            <span class="tag duration">20 min drive</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">11:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Gergeti Trinity Church</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-church"></i> 2170m Elevation
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            14th-century church dramatically positioned with Mount Kazbek backdrop. One of Georgia's most iconic views.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">FREE</span>
+                            <span class="tag duration">1.5 hours</span>
+                            <span class="tag">Must See</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Gergeti+Trinity+Church" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">13:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Lunch in Stepantsminda</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-utensils"></i> Mountain Restaurant
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Enjoy hearty mountain food with views. Try khinkali - the local dumplings are famous here.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">25-40₾</span>
+                            <span class="tag duration">1 hour</span>
+                            <span class="tag">Local Food</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">15:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Return Journey</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-road"></i> Back to Tbilisi
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Begin return journey to Tbilisi. Stop at Pasanauri for famous khinkali if time permits.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag duration">3 hours</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">18:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Evening in Tbilisi</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-city"></i> Free Time
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Return to Tbilisi. Rest or explore the city's nightlife at your leisure.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag">Relaxation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 7: Tbilisi to Kutaisi -->
+        <div class="day-content" id="day7">
+            <div class="location-badge">
+                <div class="location-icon">
+                    <i class="fas fa-route"></i>
+                </div>
+                <div class="location-info">
+                    <h2>Tbilisi → Kutaisi</h2>
+                    <p>Travel to Western Georgia</p>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">09:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Checkout & Departure</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-suitcase-rolling"></i> Leave Tbilisi
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Check out from Tbilisi accommodation. Head to Didube bus station for Kutaisi.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag duration">30 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">10:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Marshrutka to Kutaisi</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-van-shuttle"></i> 230km Journey
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Take marshrutka from Didube station to Kutaisi. Comfortable minibus journey through central Georgia.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">10₾</span>
+                            <span class="tag duration">3.5 hours</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">13:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Arrive in Kutaisi</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-city"></i> Georgia's 3rd Largest City
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Arrive at Kutaisi bus station. Take taxi to city center accommodation.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">5-10₾ taxi</span>
+                            <span class="tag duration">15 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">14:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Check-in & Lunch</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-bed"></i> City Center Hotel
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Check into hotel. Have late lunch at a local restaurant.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">20-30₾</span>
+                            <span class="tag duration">1.5 hours</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">16:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Bagrati Cathedral</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-church"></i> 11th Century Cathedral
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            UNESCO site with panoramic views over Kutaisi. Recently restored medieval cathedral.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">FREE</span>
+                            <span class="tag duration">1 hour</span>
+                            <span class="tag">UNESCO</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Bagrati+Cathedral+Kutaisi" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">18:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Kutaisi Central Park</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-tree"></i> Evening Stroll
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Beautiful park with fountains and cafes. Popular evening gathering spot for locals.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">FREE</span>
+                            <span class="tag duration">1 hour</span>
+                            <span class="tag">Relaxation</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Central+Park+Kutaisi" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">19:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Dinner at Palaty</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-utensils"></i> Traditional Restaurant
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Popular local restaurant serving Imeretian cuisine. Try the Imeretian khachapuri - different from other regions!
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">25-40₾</span>
+                            <span class="tag duration">1.5 hours</span>
+                            <span class="tag">Local Cuisine</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Palaty+Restaurant+Kutaisi" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 8: Kutaisi Nature -->
+        <div class="day-content" id="day8">
+            <div class="location-badge">
+                <div class="location-icon">
+                    <i class="fas fa-water"></i>
+                </div>
+                <div class="location-info">
+                    <h2>Kutaisi Nature Day</h2>
+                    <p>Canyons & Caves</p>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">08:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Okatse Canyon</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-hiking"></i> Walkway Adventure
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Spectacular canyon with hanging walkway 140m above the gorge. 780m long walkway with breathtaking views.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">17.25₾</span>
+                            <span class="tag duration">3 hours</span>
+                            <span class="tag">Adventure</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Okatse+Canyon" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">12:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Kinchkha Waterfall</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-water"></i> 70m High Falls
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            One of Georgia's highest waterfalls. Short walk from Okatse Canyon visitor center.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">FREE</span>
+                            <span class="tag duration">1 hour</span>
+                            <span class="tag">Nature</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Kinchkha+Waterfall" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">14:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Lunch Break</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-utensils"></i> Local Restaurant
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Stop for lunch at a local restaurant between attractions.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">20-30₾</span>
+                            <span class="tag duration">1 hour</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">15:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Prometheus Cave</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-gem"></i> Underground Wonder
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Spectacular cave system with stalactites, stalagmites, and underground rivers. 1.4km walking tour with lights and music.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">23₾</span>
+                            <span class="tag duration">1.5 hours</span>
+                            <span class="tag">Must See</span>
+                        </div>
+                        <div class="activity-actions">
+                            <a href="https://maps.google.com/?q=Prometheus+Cave+Kutaisi" class="action-btn primary">
+                                <i class="fas fa-map-marked-alt"></i> Open Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">17:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Return to Kutaisi</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-car"></i> Back to City
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Return to Kutaisi city center. Rest at hotel.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag duration">45 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">19:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Farewell Dinner</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-wine-glass-alt"></i> Last Night
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Enjoy your last Georgian dinner. Try any dishes you haven't tasted yet. Toast with chacha (Georgian brandy)!
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">40-60₾</span>
+                            <span class="tag duration">2 hours</span>
+                            <span class="tag">Celebration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 9: Departure -->
+        <div class="day-content" id="day9">
+            <div class="location-badge">
+                <div class="location-icon">
+                    <i class="fas fa-plane-departure"></i>
+                </div>
+                <div class="location-info">
+                    <h2>Departure Day</h2>
+                    <p>Early Morning Flight</p>
+                </div>
+            </div>
+
+            <div class="alert-card">
+                <i class="fas fa-exclamation-triangle alert-icon"></i>
+                <div class="alert-content">
+                    <div class="alert-title">Very Early Departure</div>
+                    <div class="alert-text">6:00 AM flight - need to leave hotel by 4:00 AM. Arrange taxi night before!</div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">03:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Wake Up & Checkout</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-clock"></i> Early Morning
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Quick checkout from hotel. Most hotels can prepare early breakfast box if requested.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag duration">30 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">04:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Taxi to Airport</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-taxi"></i> Pre-booked Transfer
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Pre-arranged taxi to Kutaisi Airport. Journey takes about 20-30 minutes.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">20-25₾</span>
+                            <span class="tag duration">30 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">04:30</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Airport Check-in</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-passport"></i> International Departure
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Arrive at airport for check-in. Small airport, so 1.5 hours before flight is sufficient.
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag duration">45 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time">06:00</div>
+                    <div class="activity-info">
+                        <div class="activity-title">Flight Departure</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-plane"></i> Goodbye Georgia!
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            Board your flight home with wonderful memories of Georgia!
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag">Safe Travels</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Bottom Navigation -->
@@ -1050,18 +2169,116 @@
             <i class="fas fa-calendar-alt"></i>
             <span>Itinerary</span>
         </button>
+        <button class="nav-item" onclick="showSection('tips')">
+            <i class="fas fa-lightbulb"></i>
+            <span>Tips</span>
+        </button>
         <button class="nav-item" onclick="showSection('map')">
             <i class="fas fa-map"></i>
             <span>Map</span>
-        </button>
-        <button class="nav-item" onclick="showSection('photos')">
-            <i class="fas fa-camera"></i>
-            <span>Photos</span>
         </button>
         <button class="nav-item" onclick="showSection('notes')">
             <i class="fas fa-sticky-note"></i>
             <span>Notes</span>
         </button>
+    </div>
+
+    <!-- Tips Modal -->
+    <div class="tips-modal" id="tipsModal">
+        <div class="tips-content">
+            <div class="tips-header">
+                <h2>Georgian Travel Tips</h2>
+                <button class="close-tips" onclick="closeTips()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="tip-category">
+                <h3><i class="fas fa-language"></i> Language & Communication</h3>
+                <ul class="tip-list">
+                    <li>Learn basic Georgian phrases: Gamarjoba (Hello), Madloba (Thank you)</li>
+                    <li>Russian is widely spoken by older generation</li>
+                    <li>English is common in tourist areas and among youth</li>
+                    <li>Download offline translator app before traveling</li>
+                </ul>
+            </div>
+
+            <div class="tip-category">
+                <h3><i class="fas fa-money-bill"></i> Money Matters</h3>
+                <ul class="tip-list">
+                    <li>Currency: Georgian Lari (₾) - 1 USD ≈ 2.7 GEL</li>
+                    <li>ATMs widely available - Bank of Georgia and TBC have English</li>
+                    <li>Cash preferred in small shops and restaurants</li>
+                    <li>Tipping: 10% in restaurants, round up for taxis</li>
+                    <li>Exchange money at banks or official exchanges, not street</li>
+                </ul>
+            </div>
+
+            <div class="tip-category">
+                <h3><i class="fas fa-bus"></i> Transportation</h3>
+                <ul class="tip-list">
+                    <li>Marshrutkas (minibuses) are cheapest for intercity travel</li>
+                    <li>Bolt and Yandex taxi apps work well in cities</li>
+                    <li>Metro in Tbilisi costs 1₾ - buy Metromoney card</li>
+                    <li>Agree on taxi price before starting journey if no meter</li>
+                    <li>Georgian Bus app for comfortable intercity buses</li>
+                </ul>
+            </div>
+
+            <div class="tip-category">
+                <h3><i class="fas fa-utensils"></i> Food & Drink</h3>
+                <ul class="tip-list">
+                    <li>Must try: Khachapuri, Khinkali, Churchkhela, Matsoni</li>
+                    <li>Tap water is safe to drink in major cities</li>
+                    <li>Wine is central to culture - toasting is important</li>
+                    <li>Vegetarians: Many dishes contain meat, ask specifically</li>
+                    <li>Eat khinkali with hands - never with fork and knife!</li>
+                </ul>
+            </div>
+
+            <div class="tip-category">
+                <h3><i class="fas fa-sim-card"></i> Connectivity</h3>
+                <ul class="tip-list">
+                    <li>Buy SIM card at airport - Magti or Geocell recommended</li>
+                    <li>Tourist SIM packages available for 20-30₾</li>
+                    <li>Free WiFi common in cafes and restaurants</li>
+                    <li>4G coverage good in cities, patchy in mountains</li>
+                </ul>
+            </div>
+
+            <div class="tip-category">
+                <h3><i class="fas fa-church"></i> Culture & Etiquette</h3>
+                <ul class="tip-list">
+                    <li>Dress modestly when visiting churches - cover shoulders</li>
+                    <li>Women need head covering in some churches</li>
+                    <li>Georgians are very hospitable - accept offered food/drink</li>
+                    <li>Remove shoes when entering homes</li>
+                    <li>Avoid political discussions about Russia or territories</li>
+                </ul>
+            </div>
+
+            <div class="tip-category">
+                <h3><i class="fas fa-medkit"></i> Health & Safety</h3>
+                <ul class="tip-list">
+                    <li>Georgia is very safe for tourists</li>
+                    <li>Pharmacies (apteka) are everywhere - many speak English</li>
+                    <li>EU/US medications widely available</li>
+                    <li>Emergency numbers: 112 (all services)</li>
+                    <li>Travel insurance recommended for mountain activities</li>
+                </ul>
+            </div>
+
+            <div class="tip-category">
+                <h3><i class="fas fa-shopping-bag"></i> Shopping</h3>
+                <ul class="tip-list">
+                    <li>Dry Bridge Market in Tbilisi for antiques and Soviet items</li>
+                    <li>Wine, churchkhela, and spices make great souvenirs</li>
+                    <li>Carrefour and Goodwill for groceries</li>
+                    <li>Most shops open 10am-8pm, closed Sundays in small towns</li>
+                    <li>Bargaining expected at markets, not in shops</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1096,30 +2313,6 @@
             currentDay = day;
         }
 
-        // Theme variations
-        const themes = [
-            { name: 'vibrant', gradient: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #45B7D1 100%)' },
-            { name: 'sunset', gradient: 'linear-gradient(135deg, #FA709A 0%, #FEE140 100%)' },
-            { name: 'ocean', gradient: 'linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%)' },
-            { name: 'berry', gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' },
-            { name: 'peach', gradient: 'linear-gradient(135deg, #FBAB7E 0%, #F7CE68 100%)' },
-            { name: 'mint', gradient: 'linear-gradient(135deg, #0ED2F7 0%, #B2FEFA 100%)' }
-        ];
-        let currentTheme = 0;
-
-        // Toggle theme
-        function toggleTheme() {
-            currentTheme = (currentTheme + 1) % themes.length;
-            document.documentElement.style.setProperty('--bg-gradient', themes[currentTheme].gradient);
-            
-            // Animate theme change
-            const toggle = document.querySelector('.theme-toggle');
-            toggle.style.transform = 'rotate(360deg) scale(1.2)';
-            setTimeout(() => {
-                toggle.style.transform = 'rotate(0) scale(1)';
-            }, 300);
-        }
-
         // Show section (bottom nav)
         function showSection(section) {
             document.querySelectorAll('.nav-item').forEach(item => {
@@ -1127,8 +2320,22 @@
             });
             event.target.closest('.nav-item').classList.add('active');
             
-            // Here you would implement different sections
-            console.log('Showing section:', section);
+            if (section === 'tips') {
+                document.getElementById('tipsModal').classList.add('active');
+            } else if (section === 'map') {
+                alert('Map view coming soon! For now, use the individual location maps in each activity.');
+            } else if (section === 'notes') {
+                alert('Notes feature coming soon! You can save this page for offline access.');
+            }
+        }
+
+        // Close tips modal
+        function closeTips() {
+            document.getElementById('tipsModal').classList.remove('active');
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-item')[0].classList.add('active');
         }
 
         // Touch gestures for swipe
@@ -1157,34 +2364,19 @@
             }
         }
 
-        // Initialize with vibrant theme
-        document.documentElement.style.setProperty('--bg-gradient', themes[0].gradient);
-
-        // Toggle menu
-        function toggleMenu() {
-            const overlay = document.getElementById('menuOverlay');
-            overlay.classList.toggle('active');
-            const menuIcon = document.getElementById('menuIcon');
-            menuIcon.className = overlay.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+        // Auto-archive past days
+        function checkDates() {
+            const today = new Date();
+            const tripStart = new Date('2025-08-10');
+            const daysDiff = Math.floor((today - tripStart) / (1000 * 60 * 60 * 24));
+            
+            if (daysDiff >= 0 && daysDiff < 9) {
+                selectDay(daysDiff + 1);
+            }
         }
 
-        // Jump to specific day
-        function jumpToDay(day) {
-            selectDay(day);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        // Check dates on load
+        window.addEventListener('load', checkDates);
     </script>
-    <!-- Menu Overlay -->
-    <div class="menu-overlay" id="menuOverlay">
-        <div class="menu-content">
-            <h2>Georgia Adventure</h2>
-            <a href="#" class="menu-item" onclick="jumpToDay(1); toggleMenu();">Day 1 - Arrival</a>
-            <a href="#" class="menu-item" onclick="jumpToDay(3); toggleMenu();">Day 3 - Tbilisi</a>
-            <a href="#" class="menu-item" onclick="jumpToDay(6); toggleMenu();">Day 6 - Kazbegi</a>
-            <a href="#" class="menu-item" onclick="jumpToDay(9); toggleMenu();">Day 9 - Departure</a>
-            <a href="#" class="menu-item" onclick="toggleMenu();">Close Menu</a>
-        </div>
-    </div>
-
 </body>
 </html>
