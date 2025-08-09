@@ -5,6 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Georgia Trip • Aug 9-18, 2025</title>
     
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX', {
+            page_title: 'Georgia Itinerary',
+            page_path: window.location.pathname
+        });
+        
+        // Track PWA installation
+        window.addEventListener('appinstalled', (evt) => {
+            gtag('event', 'app_installed', {
+                event_category: 'PWA',
+                event_label: 'Georgia Trip App'
+            });
+        });
+        
+        // Track currency converter usage
+        function trackCurrencyConversion(fromCurrency, toCurrency, amount) {
+            gtag('event', 'currency_conversion', {
+                event_category: 'Tools',
+                event_label: `${fromCurrency} to ${toCurrency}`,
+                value: amount
+            });
+        }
+        
+        // Track checklist interactions
+        function trackChecklistItem(action, itemId) {
+            gtag('event', 'checklist_' + action, {
+                event_category: 'Checklist',
+                event_label: itemId
+            });
+        }
+        
+        // Track page/day views
+        function trackDayView(dayNumber) {
+            gtag('event', 'page_view', {
+                page_title: `Day ${dayNumber}`,
+                page_path: `/day${dayNumber}`
+            });
+        }
+    </script>
+    
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#6BCB77">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -3895,6 +3940,10 @@
                 item.completed = !item.completed;
                 saveChecklist();
                 renderChecklist();
+                // Track checklist interaction
+                if (typeof gtag !== 'undefined') {
+                    trackChecklistItem(item.completed ? 'complete' : 'uncomplete', itemId);
+                }
             }
         }
         
