@@ -145,7 +145,7 @@
 
         /* Content Container */
         .content-container {
-            padding: 0 15px 100px;
+            padding: 0 15px 30px;
             max-width: 500px;
             margin: 0 auto;
         }
@@ -388,135 +388,6 @@
             line-height: 1.4;
         }
 
-        /* Bottom Navigation */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            padding: 10px 20px 25px;
-            display: flex;
-            justify-content: space-around;
-            z-index: 100;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            padding: 8px;
-            border: none;
-            background: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: var(--text-secondary);
-        }
-
-        .nav-item.active {
-            color: var(--accent-purple);
-        }
-
-        .nav-item i {
-            font-size: 1.2rem;
-        }
-
-        .nav-item span {
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-
-        /* Tips Modal */
-        .tips-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 200;
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .tips-modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .tips-content {
-            background: white;
-            border-radius: 20px;
-            max-width: 500px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-            padding: 20px;
-        }
-
-        .tips-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .tips-header h2 {
-            color: var(--accent-purple);
-            font-size: 1.5rem;
-        }
-
-        .close-tips {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            cursor: pointer;
-        }
-
-        .tip-category {
-            margin-bottom: 25px;
-        }
-
-        .tip-category h3 {
-            color: var(--accent-violet);
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .tip-category i {
-            font-size: 1rem;
-        }
-
-        .tip-list {
-            list-style: none;
-        }
-
-        .tip-list li {
-            padding: 8px 0;
-            padding-left: 20px;
-            position: relative;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .tip-list li:before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: var(--accent-purple);
-        }
     </style>
 </head>
 <body>
@@ -533,7 +404,12 @@
 
     <!-- Day Selector -->
     <div class="day-selector" id="daySelector">
-        <div class="day-card active" onclick="selectDay(1)">
+        <div class="day-card active" onclick="selectDay(0)">
+            <div class="day-num">GUIDE</div>
+            <div class="day-date"><i class="fas fa-info-circle"></i></div>
+            <div class="day-location">Essential</div>
+        </div>
+        <div class="day-card" onclick="selectDay(1)">
             <div class="day-num">SAT</div>
             <div class="day-date">10</div>
             <div class="day-location">Arrival</div>
@@ -582,8 +458,476 @@
 
     <!-- Content Container -->
     <div class="content-container">
+        <!-- Tips Section -->
+        <div class="day-content active" id="day0">
+            <div class="location-badge">
+                <div class="location-icon">
+                    <i class="fas fa-compass"></i>
+                </div>
+                <div class="location-info">
+                    <h2>Georgia Travel Guide</h2>
+                    <p>Everything You Need to Know</p>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time"><i class="fas fa-language"></i></div>
+                    <div class="activity-info">
+                        <div class="activity-title">Language & Communication</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-comments"></i> Basic Phrases
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            • Gamarjoba - Hello<br>
+                            • Madloba - Thank you<br>
+                            • Nakhvamdis - Goodbye<br>
+                            • Russian widely spoken by older generation<br>
+                            • English common in tourist areas<br>
+                            • Download offline translator app
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag">Essential</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time"><i class="fas fa-credit-card"></i></div>
+                    <div class="activity-info">
+                        <div class="activity-title">Payment Methods</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-wallet"></i> Money & Cards
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            <strong>Currency:</strong><br>
+                            • Georgian Lari (₾/GEL)<br>
+                            • 1 USD ≈ 2.7 GEL<br>
+                            • 1 EUR ≈ 3.0 GEL<br><br>
+                            <strong>Cards Accepted:</strong><br>
+                            • Visa/Mastercard everywhere<br>
+                            • Contactless payments common<br>
+                            • Small shops prefer cash<br><br>
+                            <strong>ATMs:</strong><br>
+                            • Bank of Georgia (orange)<br>
+                            • TBC Bank (blue)<br>
+                            • Both have English interface<br>
+                            • Max withdrawal: 2000-3000₾<br><br>
+                            <strong>Tips:</strong><br>
+                            • Exchange at banks/official exchanges<br>
+                            • Keep small bills for marshrutkas<br>
+                            • 10% tip in restaurants
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag">Banking</span>
+                            <span class="tag price">Money</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time"><i class="fas fa-bus"></i></div>
+                    <div class="activity-info">
+                        <div class="activity-title">Transportation</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-route"></i> Getting Around
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            • Marshrutkas: Cheap minibuses for intercity<br>
+                            • Bolt & Yandex taxi apps work well<br>
+                            • Tbilisi Metro: 1₾ with Metromoney card<br>
+                            • Agree taxi price before journey<br>
+                            • Georgian Bus app for comfortable buses<br>
+                            • Trains available for major routes
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag">Transport</span>
+                            <span class="tag price">Budget</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time"><i class="fas fa-utensils"></i></div>
+                    <div class="activity-info">
+                        <div class="activity-title">Food & Drink</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-wine-glass"></i> Must Try Dishes
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            • Khachapuri - Cheese-filled bread<br>
+                            • Khinkali - Dumplings (eat with hands!)<br>
+                            • Churchkhela - Walnut candy<br>
+                            • Matsoni - Yogurt<br>
+                            • Wine is central to culture<br>
+                            • Tap water safe in cities<br>
+                            • Vegetarians: Ask specifically, many dishes have meat
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag">Cuisine</span>
+                            <span class="tag">Wine</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time"><i class="fas fa-mobile-alt"></i></div>
+                    <div class="activity-info">
+                        <div class="activity-title">Essential Apps to Install</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-download"></i> Download Before Trip
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            <strong>Transportation:</strong><br>
+                            • Bolt - Best taxi app<br>
+                            • Yandex Taxi - Alternative<br>
+                            • Georgian Bus - Intercity buses<br><br>
+                            <strong>Communication:</strong><br>
+                            • Google Translate (download Georgian offline)<br>
+                            • WhatsApp - Widely used<br><br>
+                            <strong>Maps & Navigation:</strong><br>
+                            • Maps.me - Works offline<br>
+                            • Google Maps (download offline areas)<br><br>
+                            <strong>Food & Reviews:</strong><br>
+                            • TripAdvisor<br>
+                            • Google Reviews
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag">Apps</span>
+                            <span class="tag">Essential</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time"><i class="fas fa-sim-card"></i></div>
+                    <div class="activity-info">
+                        <div class="activity-title">SIM Card & Internet</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-wifi"></i> Stay Connected
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            <strong>Where to Buy:</strong><br>
+                            • Airport arrivals hall<br>
+                            • Any phone shop in city<br><br>
+                            <strong>Providers:</strong><br>
+                            • Magti - Best coverage<br>
+                            • Geocell - Good alternative<br><br>
+                            <strong>Tourist Packages:</strong><br>
+                            • 20-30₾ for 10-30 days<br>
+                            • Unlimited social media<br>
+                            • 5-10GB data<br><br>
+                            <strong>Tips:</strong><br>
+                            • Free WiFi everywhere<br>
+                            • 4G in cities, 3G in mountains
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag price">20-30₾</span>
+                            <span class="tag">Connectivity</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time"><i class="fas fa-church"></i></div>
+                    <div class="activity-info">
+                        <div class="activity-title">Culture & Etiquette</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-hand-peace"></i> Local Customs
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            • Dress modestly in churches<br>
+                            • Women need head covering in some churches<br>
+                            • Georgians are very hospitable<br>
+                            • Accept offered food/drink<br>
+                            • Remove shoes in homes<br>
+                            • Avoid political discussions<br>
+                            • Toasting is important at meals
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag">Culture</span>
+                            <span class="tag">Respect</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time"><i class="fas fa-medkit"></i></div>
+                    <div class="activity-info">
+                        <div class="activity-title">Health & Safety</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-shield-alt"></i> Emergency Info
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            • Georgia is very safe for tourists<br>
+                            • Emergency: 112 (all services)<br>
+                            • Pharmacies (apteka) everywhere<br>
+                            • EU/US medications available<br>
+                            • Travel insurance recommended<br>
+                            • Mountain weather unpredictable<br>
+                            • Bring warm clothes for Kazbegi
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag">Safety</span>
+                            <span class="tag">Emergency</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time"><i class="fas fa-map-marked-alt"></i></div>
+                    <div class="activity-info">
+                        <div class="activity-title">Batumi Tips</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-umbrella-beach"></i> Black Sea Resort
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            <strong>Best Areas to Stay:</strong><br>
+                            • Near Boulevard for beach access<br>
+                            • Old Town for charm<br><br>
+                            <strong>Must Do:</strong><br>
+                            • Evening boulevard walk<br>
+                            • Ali & Nino statue at sunset<br>
+                            • Cable car for views<br>
+                            • Try Adjarian khachapuri (boat-shaped)<br><br>
+                            <strong>Beach Tips:</strong><br>
+                            • Rocky beach, bring water shoes<br>
+                            • Beach bars open till late<br><br>
+                            <strong>Day Trips:</strong><br>
+                            • Gonio Fortress (15 min)<br>
+                            • Sarpi border with Turkey (30 min)
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag">Batumi</span>
+                            <span class="tag">Days 1-2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time"><i class="fas fa-city"></i></div>
+                    <div class="activity-info">
+                        <div class="activity-title">Tbilisi Tips</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-landmark"></i> Capital City
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            <strong>Best Areas to Stay:</strong><br>
+                            • Old Town (Sololaki) - Historic<br>
+                            • Rustaveli - Central<br>
+                            • Vera - Trendy cafes<br><br>
+                            <strong>Must Do:</strong><br>
+                            • Narikala cable car at sunset<br>
+                            • Sulfur bath experience<br>
+                            • Walk Shardeni street<br>
+                            • Chronicle of Georgia monument<br><br>
+                            <strong>Food Spots:</strong><br>
+                            • Shavi Lomi - Modern Georgian<br>
+                            • Keto & Kote - Traditional<br>
+                            • Fabrika - Hip food court<br><br>
+                            <strong>Transport:</strong><br>
+                            • Metro: 1₾ with card<br>
+                            • Bolt taxi everywhere<br>
+                            • Walk in Old Town
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag">Tbilisi</span>
+                            <span class="tag">Days 3-6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time"><i class="fas fa-mountain"></i></div>
+                    <div class="activity-info">
+                        <div class="activity-title">Kazbegi Tips</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-hiking"></i> Mountain Adventure
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            <strong>Getting There:</strong><br>
+                            • Marshrutka: 15₾ from Didube<br>
+                            • Shared taxi: 20-25₾<br>
+                            • Tour: 80-100₾ with stops<br><br>
+                            <strong>To Gergeti Church:</strong><br>
+                            • 4WD taxi: 60₾ per car (share)<br>
+                            • Hike: 1.5 hours uphill<br><br>
+                            <strong>What to Bring:</strong><br>
+                            • Warm jacket (even summer)<br>
+                            • Good shoes<br>
+                            • Cash (no ATMs)<br>
+                            • Snacks for journey<br><br>
+                            <strong>Tips:</strong><br>
+                            • Stop at Ananuri Fortress<br>
+                            • Eat khinkali in Pasanauri<br>
+                            • Best views: 10am-2pm
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag">Kazbegi</span>
+                            <span class="tag">Day 6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time"><i class="fas fa-water"></i></div>
+                    <div class="activity-info">
+                        <div class="activity-title">Kutaisi Tips</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-gem"></i> Caves & Canyons
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            <strong>Must Visit:</strong><br>
+                            • Prometheus Cave - Book ahead<br>
+                            • Okatse Canyon - Morning best<br>
+                            • Martvili Canyon - Boat ride<br>
+                            • Bagrati Cathedral - Sunset<br><br>
+                            <strong>Getting Around:</strong><br>
+                            • Hire taxi for day: 100-150₾<br>
+                            • Tours available: 50-70₾ pp<br>
+                            • Marshrutkas to attractions<br><br>
+                            <strong>Airport Transfer:</strong><br>
+                            • Georgian Bus: Book online<br>
+                            • Taxi: 20-25₾ (30 min)<br>
+                            • Agree price beforehand<br><br>
+                            <strong>Food:</strong><br>
+                            • Try Imeretian khachapuri<br>
+                            • Palaty restaurant recommended
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag">Kutaisi</span>
+                            <span class="tag">Days 7-9</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card" onclick="toggleCard(this)">
+                <div class="activity-header">
+                    <div class="activity-time"><i class="fas fa-shopping-bag"></i></div>
+                    <div class="activity-info">
+                        <div class="activity-title">What to Buy Where</div>
+                        <div class="activity-subtitle">
+                            <i class="fas fa-gift"></i> Shopping Guide
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down activity-expand"></i>
+                </div>
+                <div class="activity-details">
+                    <div class="activity-content">
+                        <p class="activity-description">
+                            <strong>Batumi:</strong><br>
+                            • Local honey & tea<br>
+                            • Beach souvenirs<br>
+                            • Adjarian spices<br><br>
+                            <strong>Tbilisi - Dry Bridge:</strong><br>
+                            • Soviet memorabilia<br>
+                            • Vintage cameras<br>
+                            • Old coins & medals<br>
+                            • Handmade carpets<br><br>
+                            <strong>Tbilisi - Shops:</strong><br>
+                            • Wine: 8000 Vintages shop<br>
+                            • Churchkhela: Any market<br>
+                            • Spices: Deserter's Bazaar<br>
+                            • Crafts: Meidan Bazaar<br><br>
+                            <strong>Airport Duty Free:</strong><br>
+                            • Georgian wine<br>
+                            • Chacha (brandy)<br>
+                            • Last-minute souvenirs
+                        </p>
+                        <div class="activity-tags">
+                            <span class="tag">Shopping</span>
+                            <span class="tag">Souvenirs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Day 1: Arrival & Batumi -->
-        <div class="day-content active" id="day1">
+        <div class="day-content" id="day1">
             <div class="location-badge">
                 <div class="location-icon">
                     <i class="fas fa-plane-arrival"></i>
@@ -655,7 +999,7 @@
                 <div class="activity-header">
                     <div class="activity-time">14:30</div>
                     <div class="activity-info">
-                        <div class="activity-title">Check-in Batumi</div>
+                        <div class="activity-title">Arrive Batumi & Check-in</div>
                         <div class="activity-subtitle">
                             <i class="fas fa-bed"></i> Hotel near Boulevard
                         </div>
@@ -665,11 +1009,11 @@
                 <div class="activity-details">
                     <div class="activity-content">
                         <p class="activity-description">
-                            Check into your hotel in Batumi. Choose accommodation near the boulevard for easy beach access and evening walks.
+                            Arrive in Batumi after 2.5 hour bus journey. Check into your hotel near the boulevard for easy beach access.
                         </p>
                         <div class="activity-tags">
                             <span class="tag">Hotel</span>
-                            <span class="tag duration">30 min</span>
+                            <span class="tag duration">45 min</span>
                         </div>
                     </div>
                 </div>
@@ -677,7 +1021,7 @@
 
             <div class="activity-card" onclick="toggleCard(this)">
                 <div class="activity-header">
-                    <div class="activity-time">16:00</div>
+                    <div class="activity-time">15:30</div>
                     <div class="activity-info">
                         <div class="activity-title">Batumi Boulevard</div>
                         <div class="activity-subtitle">
@@ -707,7 +1051,7 @@
 
             <div class="activity-card" onclick="toggleCard(this)">
                 <div class="activity-header">
-                    <div class="activity-time">19:00</div>
+                    <div class="activity-time">18:00</div>
                     <div class="activity-info">
                         <div class="activity-title">Piazza Square</div>
                         <div class="activity-subtitle">
@@ -723,7 +1067,7 @@
                         </p>
                         <div class="activity-tags">
                             <span class="tag price">30-50₾</span>
-                            <span class="tag duration">2 hours</span>
+                            <span class="tag duration">1.5 hours</span>
                             <span class="tag">Live Music</span>
                         </div>
                         <div class="activity-actions">
@@ -1016,7 +1360,7 @@
 
             <div class="activity-card" onclick="toggleCard(this)">
                 <div class="activity-header">
-                    <div class="activity-time">17:00</div>
+                    <div class="activity-time">16:30</div>
                     <div class="activity-info">
                         <div class="activity-title">Old Town Walk</div>
                         <div class="activity-subtitle">
@@ -1032,7 +1376,7 @@
                         </p>
                         <div class="activity-tags">
                             <span class="tag price">FREE</span>
-                            <span class="tag duration">2 hours</span>
+                            <span class="tag duration">1.5 hours</span>
                             <span class="tag">Historic</span>
                         </div>
                         <div class="activity-actions">
@@ -1046,7 +1390,7 @@
 
             <div class="activity-card" onclick="toggleCard(this)">
                 <div class="activity-header">
-                    <div class="activity-time">19:30</div>
+                    <div class="activity-time">18:30</div>
                     <div class="activity-info">
                         <div class="activity-title">Dinner at Shavi Lomi</div>
                         <div class="activity-subtitle">
@@ -1630,7 +1974,7 @@
 
             <div class="activity-card" onclick="toggleCard(this)">
                 <div class="activity-header">
-                    <div class="activity-time">15:00</div>
+                    <div class="activity-time">14:30</div>
                     <div class="activity-info">
                         <div class="activity-title">Return Journey</div>
                         <div class="activity-subtitle">
@@ -1653,7 +1997,7 @@
 
             <div class="activity-card" onclick="toggleCard(this)">
                 <div class="activity-header">
-                    <div class="activity-time">18:30</div>
+                    <div class="activity-time">18:00</div>
                     <div class="activity-info">
                         <div class="activity-title">Evening in Tbilisi</div>
                         <div class="activity-subtitle">
@@ -2163,126 +2507,9 @@
         </div>
     </div>
 
-    <!-- Bottom Navigation -->
-    <div class="bottom-nav">
-        <button class="nav-item active" onclick="showSection('itinerary')">
-            <i class="fas fa-calendar-alt"></i>
-            <span>Itinerary</span>
-        </button>
-        <button class="nav-item" onclick="showSection('tips')">
-            <i class="fas fa-lightbulb"></i>
-            <span>Tips</span>
-        </button>
-        <button class="nav-item" onclick="showSection('map')">
-            <i class="fas fa-map"></i>
-            <span>Map</span>
-        </button>
-        <button class="nav-item" onclick="showSection('notes')">
-            <i class="fas fa-sticky-note"></i>
-            <span>Notes</span>
-        </button>
-    </div>
-
-    <!-- Tips Modal -->
-    <div class="tips-modal" id="tipsModal">
-        <div class="tips-content">
-            <div class="tips-header">
-                <h2>Georgian Travel Tips</h2>
-                <button class="close-tips" onclick="closeTips()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-
-            <div class="tip-category">
-                <h3><i class="fas fa-language"></i> Language & Communication</h3>
-                <ul class="tip-list">
-                    <li>Learn basic Georgian phrases: Gamarjoba (Hello), Madloba (Thank you)</li>
-                    <li>Russian is widely spoken by older generation</li>
-                    <li>English is common in tourist areas and among youth</li>
-                    <li>Download offline translator app before traveling</li>
-                </ul>
-            </div>
-
-            <div class="tip-category">
-                <h3><i class="fas fa-money-bill"></i> Money Matters</h3>
-                <ul class="tip-list">
-                    <li>Currency: Georgian Lari (₾) - 1 USD ≈ 2.7 GEL</li>
-                    <li>ATMs widely available - Bank of Georgia and TBC have English</li>
-                    <li>Cash preferred in small shops and restaurants</li>
-                    <li>Tipping: 10% in restaurants, round up for taxis</li>
-                    <li>Exchange money at banks or official exchanges, not street</li>
-                </ul>
-            </div>
-
-            <div class="tip-category">
-                <h3><i class="fas fa-bus"></i> Transportation</h3>
-                <ul class="tip-list">
-                    <li>Marshrutkas (minibuses) are cheapest for intercity travel</li>
-                    <li>Bolt and Yandex taxi apps work well in cities</li>
-                    <li>Metro in Tbilisi costs 1₾ - buy Metromoney card</li>
-                    <li>Agree on taxi price before starting journey if no meter</li>
-                    <li>Georgian Bus app for comfortable intercity buses</li>
-                </ul>
-            </div>
-
-            <div class="tip-category">
-                <h3><i class="fas fa-utensils"></i> Food & Drink</h3>
-                <ul class="tip-list">
-                    <li>Must try: Khachapuri, Khinkali, Churchkhela, Matsoni</li>
-                    <li>Tap water is safe to drink in major cities</li>
-                    <li>Wine is central to culture - toasting is important</li>
-                    <li>Vegetarians: Many dishes contain meat, ask specifically</li>
-                    <li>Eat khinkali with hands - never with fork and knife!</li>
-                </ul>
-            </div>
-
-            <div class="tip-category">
-                <h3><i class="fas fa-sim-card"></i> Connectivity</h3>
-                <ul class="tip-list">
-                    <li>Buy SIM card at airport - Magti or Geocell recommended</li>
-                    <li>Tourist SIM packages available for 20-30₾</li>
-                    <li>Free WiFi common in cafes and restaurants</li>
-                    <li>4G coverage good in cities, patchy in mountains</li>
-                </ul>
-            </div>
-
-            <div class="tip-category">
-                <h3><i class="fas fa-church"></i> Culture & Etiquette</h3>
-                <ul class="tip-list">
-                    <li>Dress modestly when visiting churches - cover shoulders</li>
-                    <li>Women need head covering in some churches</li>
-                    <li>Georgians are very hospitable - accept offered food/drink</li>
-                    <li>Remove shoes when entering homes</li>
-                    <li>Avoid political discussions about Russia or territories</li>
-                </ul>
-            </div>
-
-            <div class="tip-category">
-                <h3><i class="fas fa-medkit"></i> Health & Safety</h3>
-                <ul class="tip-list">
-                    <li>Georgia is very safe for tourists</li>
-                    <li>Pharmacies (apteka) are everywhere - many speak English</li>
-                    <li>EU/US medications widely available</li>
-                    <li>Emergency numbers: 112 (all services)</li>
-                    <li>Travel insurance recommended for mountain activities</li>
-                </ul>
-            </div>
-
-            <div class="tip-category">
-                <h3><i class="fas fa-shopping-bag"></i> Shopping</h3>
-                <ul class="tip-list">
-                    <li>Dry Bridge Market in Tbilisi for antiques and Soviet items</li>
-                    <li>Wine, churchkhela, and spices make great souvenirs</li>
-                    <li>Carrefour and Goodwill for groceries</li>
-                    <li>Most shops open 10am-8pm, closed Sundays in small towns</li>
-                    <li>Bargaining expected at markets, not in shops</li>
-                </ul>
-            </div>
-        </div>
-    </div>
 
     <script>
-        let currentDay = 1;
+        let currentDay = 0;
 
         // Toggle activity card expansion
         function toggleCard(card) {
@@ -2295,7 +2522,7 @@
             document.querySelectorAll('.day-card').forEach(card => {
                 card.classList.remove('active');
             });
-            document.querySelectorAll('.day-card')[day - 1].classList.add('active');
+            document.querySelectorAll('.day-card')[day].classList.add('active');
 
             // Update content
             document.querySelectorAll('.day-content').forEach(content => {
@@ -2307,36 +2534,12 @@
             }
 
             // Scroll selected day into view
-            const selectedCard = document.querySelectorAll('.day-card')[day - 1];
+            const selectedCard = document.querySelectorAll('.day-card')[day];
             selectedCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
 
             currentDay = day;
         }
 
-        // Show section (bottom nav)
-        function showSection(section) {
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            event.target.closest('.nav-item').classList.add('active');
-            
-            if (section === 'tips') {
-                document.getElementById('tipsModal').classList.add('active');
-            } else if (section === 'map') {
-                alert('Map view coming soon! For now, use the individual location maps in each activity.');
-            } else if (section === 'notes') {
-                alert('Notes feature coming soon! You can save this page for offline access.');
-            }
-        }
-
-        // Close tips modal
-        function closeTips() {
-            document.getElementById('tipsModal').classList.remove('active');
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            document.querySelectorAll('.nav-item')[0].classList.add('active');
-        }
 
         // Touch gestures for swipe
         let touchStartX = 0;
@@ -2358,7 +2561,7 @@
             if (Math.abs(diff) > swipeThreshold) {
                 if (diff > 0 && currentDay < 9) {
                     selectDay(currentDay + 1);
-                } else if (diff < 0 && currentDay > 1) {
+                } else if (diff < 0 && currentDay > 0) {
                     selectDay(currentDay - 1);
                 }
             }
@@ -2372,6 +2575,8 @@
             
             if (daysDiff >= 0 && daysDiff < 9) {
                 selectDay(daysDiff + 1);
+            } else {
+                selectDay(0); // Show tips by default before trip
             }
         }
 
