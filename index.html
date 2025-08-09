@@ -16,7 +16,7 @@
 
         :root {
             --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-bg: rgba(255, 255, 255, 0.98);
             --text-primary: #1a202c;
             --text-secondary: #4a5568;
             --accent-primary: #FFD93D;
@@ -58,7 +58,7 @@
             background-size: 300px 300px, 300px 300px, 300px 300px;
             background-position: 0 0, 150px 150px, 75px 75px;
             pointer-events: none;
-            opacity: 0.6;
+            opacity: 0.2;
             animation: float 30s ease-in-out infinite;
         }
 
@@ -78,7 +78,7 @@
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cg%3E%3Ccircle cx='10' cy='10' r='2' fill='%23e8e8e8'/%3E%3Ccircle cx='30' cy='10' r='2.5' fill='%23e0e0e0'/%3E%3Ccircle cx='50' cy='10' r='2' fill='%23d8d8d8'/%3E%3Ccircle cx='70' cy='10' r='3' fill='%23e8e8e8'/%3E%3Ccircle cx='90' cy='10' r='2' fill='%23e0e0e0'/%3E%3Ccircle cx='10' cy='30' r='2.5' fill='%23d8d8d8'/%3E%3Ccircle cx='30' cy='30' r='3' fill='%23e0e0e0'/%3E%3Ccircle cx='50' cy='30' r='3.5' fill='%23e8e8e8'/%3E%3Ccircle cx='70' cy='30' r='3' fill='%23d0d0d0'/%3E%3Ccircle cx='90' cy='30' r='2.5' fill='%23d8d8d8'/%3E%3Ccircle cx='10' cy='50' r='3' fill='%23e0e0e0'/%3E%3Ccircle cx='30' cy='50' r='3.5' fill='%23d8d8d8'/%3E%3Ccircle cx='50' cy='50' r='4' fill='%23e8e8e8'/%3E%3Ccircle cx='70' cy='50' r='3.5' fill='%23e0e0e0'/%3E%3Ccircle cx='90' cy='50' r='3' fill='%23d8d8d8'/%3E%3Ccircle cx='10' cy='70' r='2.5' fill='%23d0d0d0'/%3E%3Ccircle cx='30' cy='70' r='3' fill='%23e8e8e8'/%3E%3Ccircle cx='50' cy='70' r='3.5' fill='%23d8d8d8'/%3E%3Ccircle cx='70' cy='70' r='3' fill='%23e0e0e0'/%3E%3Ccircle cx='90' cy='70' r='2.5' fill='%23d8d8d8'/%3E%3Ccircle cx='10' cy='90' r='2' fill='%23e8e8e8'/%3E%3Ccircle cx='30' cy='90' r='2.5' fill='%23d0d0d0'/%3E%3Ccircle cx='50' cy='90' r='2' fill='%23e0e0e0'/%3E%3Ccircle cx='70' cy='90' r='2.5' fill='%23d8d8d8'/%3E%3Ccircle cx='90' cy='90' r='2' fill='%23e8e8e8'/%3E%3C/g%3E%3C/svg%3E");
             background-size: 100px 100px;
             background-position: 0 0;
-            opacity: 0.5;
+            opacity: 0.15;
             pointer-events: none;
         }
 
@@ -139,7 +139,7 @@
 
         .day-card {
             flex: 0 0 auto;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 1);
             backdrop-filter: blur(10px);
             border-radius: 16px;
             padding: 15px 20px;
@@ -148,7 +148,7 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.5);
+            border: 2px solid rgba(0, 0, 0, 0.05);
         }
 
         .day-card:active {
@@ -219,7 +219,7 @@
 
         /* Location Badge */
         .location-badge {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 1);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 15px 20px;
@@ -228,7 +228,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .location-icon {
@@ -257,14 +257,14 @@
 
         /* Activity Cards */
         .activity-card {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 1);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             margin-bottom: 15px;
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .activity-card:active {
@@ -400,6 +400,7 @@
             color: #1a202c;
             box-shadow: 0 3px 10px rgba(255, 217, 61, 0.3);
             font-weight: 600;
+            opacity: 1 !important;
         }
 
         .action-btn.secondary {
@@ -879,12 +880,7 @@
 
     <!-- Day Selector -->
     <div class="day-selector" id="daySelector">
-        <div class="day-card active" onclick="selectDay(0)">
-            <div class="day-num">GUIDE</div>
-            <div class="day-date"><i class="fas fa-info-circle"></i></div>
-            <div class="day-location">Essential</div>
-        </div>
-        <div class="day-card" onclick="selectDay(1)">
+        <div class="day-card active" onclick="selectDay(1)">
             <div class="day-num">SUN</div>
             <div class="day-date">10</div>
             <div class="day-location">Arrival</div>
@@ -3113,7 +3109,7 @@
             if (daysDiff >= 0 && daysDiff < 9) {
                 selectDay(daysDiff + 1);
             } else {
-                selectDay(0); // Show tips by default before trip
+                selectDay(1); // Show Day 1 by default before trip
             }
         }
 
@@ -3228,7 +3224,10 @@
                 checklistData[section].forEach(item => {
                     const itemDiv = document.createElement('div');
                     itemDiv.className = 'checklist-item' + (item.completed ? ' completed' : '');
-                    itemDiv.onclick = () => toggleChecklistItem(section, item.id);
+                    itemDiv.onclick = (e) => {
+                        if (e.target.closest('.calendar-btn')) return;
+                        toggleChecklistItem(section, item.id);
+                    };
                     
                     const checkbox = document.createElement('div');
                     checkbox.className = 'checklist-checkbox';
