@@ -3429,6 +3429,95 @@
 
 
     <script>
+        // Enhanced Storage System for PWA Persistence
+        const StorageManager = {
+            prefix: 'georgia_trip_',
+            
+            // Get data with fallback mechanisms
+            get: function(key) {
+                const fullKey = this.prefix + key;
+                try {
+                    // Try localStorage first
+                    let data = localStorage.getItem(fullKey);
+                    if (data) return JSON.parse(data);
+                    
+                    // Fallback to sessionStorage
+                    data = sessionStorage.getItem(fullKey);
+                    if (data) return JSON.parse(data);
+                    
+                } catch (e) {
+                    console.error('Storage read error:', e);
+                }
+                return null;
+            },
+            
+            // Set data with multiple storage mechanisms
+            set: function(key, value) {
+                const fullKey = this.prefix + key;
+                const data = JSON.stringify(value);
+                
+                try {
+                    // Save to localStorage
+                    localStorage.setItem(fullKey, data);
+                    // Backup to sessionStorage
+                    sessionStorage.setItem(fullKey, data);
+                    return true;
+                } catch (e) {
+                    console.error('Storage write error:', e);
+                    // If quota exceeded, try to clear old data
+                    this.clearOldData();
+                    try {
+                        localStorage.setItem(fullKey, data);
+                        return true;
+                    } catch (e2) {
+                        console.error('Storage still failing:', e2);
+                        return false;
+                    }
+                }
+            },
+            
+            // Clear old or corrupted data
+            clearOldData: function() {
+                try {
+                    // Remove old format keys
+                    ['georgiaChecklist', 'georgiaActivityLog'].forEach(oldKey => {
+                        localStorage.removeItem(oldKey);
+                        sessionStorage.removeItem(oldKey);
+                    });
+                } catch (e) {
+                    console.error('Could not clear old data:', e);
+                }
+            },
+            
+            // Migrate from old storage keys
+            migrate: function() {
+                // Migrate checklist
+                if (!this.get('checklist_v2')) {
+                    const oldData = localStorage.getItem('georgiaChecklist');
+                    if (oldData) {
+                        try {
+                            this.set('checklist_v2', JSON.parse(oldData));
+                            localStorage.removeItem('georgiaChecklist');
+                        } catch (e) {}
+                    }
+                }
+                
+                // Migrate activity log
+                if (!this.get('activityLog_v2')) {
+                    const oldData = localStorage.getItem('georgiaActivityLog');
+                    if (oldData) {
+                        try {
+                            this.set('activityLog_v2', JSON.parse(oldData));
+                            localStorage.removeItem('georgiaActivityLog');
+                        } catch (e) {}
+                    }
+                }
+            }
+        };
+        
+        // Run migration on load
+        StorageManager.migrate();
+        
         let currentDay = 0;
         let allExpanded = true;
 
@@ -3775,8 +3864,45 @@
         
         // Check dates on load
         window.addEventListener('load', () => {
+            // Test storage availability
+            try {
+                const test = '__test__';
+                localStorage.setItem(test, test);
+                localStorage.removeItem(test);
+                console.log('Storage is available');
+            } catch(e) {
+                console.error('Storage not available:', e);
+                alert('Storage is not available. Your changes may not be saved.');
+            }
+            
             checkDates();
             initializeChecklist();
+            
+            // Periodic auto-save for PWA
+            setInterval(() => {
+                saveChecklist();
+                StorageManager.set('activityLog_v2', activityLog);
+                console.log('Auto-saved at', new Date().toLocaleTimeString());
+            }, 30000); // Every 30 seconds
+            
+            // Save before page unload
+            window.addEventListener('beforeunload', () => {
+                saveChecklist();
+                StorageManager.set('activityLog_v2', activityLog);
+            });
+            
+            // Handle visibility change (PWA switching)
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    // Save when app goes to background
+                    saveChecklist();
+                    StorageManager.set('activityLog_v2', activityLog);
+                } else {
+                    // Reload data when app comes back
+                    initializeChecklist();
+                    activityLog = StorageManager.get('activityLog_v2') || activityLog || {};
+                }
+            });
         });
         
         // Checklist functionality
