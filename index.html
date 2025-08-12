@@ -969,6 +969,17 @@
             }
         }
         
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        
         .currency-header {
             display: flex;
             justify-content: space-between;
@@ -3489,33 +3500,84 @@
                 }
             },
             
-            // Migrate from old storage keys
+            // Migrate from old storage keys (only runs once)
             migrate: function() {
+                // Check if migration has already been done
+                const migrationDone = this.get('migration_completed');
+                if (migrationDone) {
+                    return; // Already migrated
+                }
+                
+                console.log('Running one-time data migration...');
+                let migrated = false;
+                
                 // Migrate checklist
-                if (!this.get('checklist_v2')) {
-                    const oldData = localStorage.getItem('georgiaChecklist');
-                    if (oldData) {
-                        try {
-                            this.set('checklist_v2', JSON.parse(oldData));
-                            localStorage.removeItem('georgiaChecklist');
-                        } catch (e) {}
+                const oldChecklist = localStorage.getItem('georgiaChecklist');
+                if (oldChecklist) {
+                    try {
+                        this.set('checklist_v2', JSON.parse(oldChecklist));
+                        localStorage.removeItem('georgiaChecklist');
+                        console.log('Migrated checklist data');
+                        migrated = true;
+                    } catch (e) {
+                        console.error('Failed to migrate checklist:', e);
                     }
                 }
                 
                 // Migrate activity log
-                if (!this.get('activityLog_v2')) {
-                    const oldData = localStorage.getItem('georgiaActivityLog');
-                    if (oldData) {
-                        try {
-                            this.set('activityLog_v2', JSON.parse(oldData));
-                            localStorage.removeItem('georgiaActivityLog');
-                        } catch (e) {}
+                const oldActivityLog = localStorage.getItem('georgiaActivityLog');
+                if (oldActivityLog) {
+                    try {
+                        this.set('activityLog_v2', JSON.parse(oldActivityLog));
+                        localStorage.removeItem('georgiaActivityLog');
+                        console.log('Migrated activity log data');
+                        migrated = true;
+                    } catch (e) {
+                        console.error('Failed to migrate activity log:', e);
                     }
                 }
+                
+                // Mark migration as completed
+                this.set('migration_completed', true);
+                
+                if (migrated) {
+                    console.log('Migration completed successfully');
+                    // Show a brief notification
+                    this.showMigrationNotification();
+                }
+            },
+            
+            // Show notification about migration
+            showMigrationNotification: function() {
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #6BCB77, #4D96FF);
+                    color: white;
+                    padding: 12px 20px;
+                    border-radius: 25px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                    z-index: 10000;
+                    font-size: 0.9rem;
+                    animation: slideDown 0.3s ease;
+                `;
+                notification.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    Your data has been migrated to the new version!
+                `;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.animation = 'slideUp 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
             }
         };
         
-        // Run migration on load
+        // Run migration only if needed (on first load after update)
         StorageManager.migrate();
         
         let currentDay = 0;
