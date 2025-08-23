@@ -14,7 +14,7 @@ A beautiful, mobile-friendly web itinerary for a 9-day trip through Georgia (Aug
 - **Day 6**: Kazbegi Day Trip - Mountain Adventure
 - **Day 7**: Travel to Kutaisi
 - **Day 8**: Kutaisi - Okatse Canyon, Prometheus Cave
-- **Day 9**: Early morning departure (6 AM flight)
+- **Day 9**: Early morning departure (10 AM flight)
 
 ## ✨ Features
 
